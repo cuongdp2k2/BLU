@@ -1,15 +1,20 @@
-module top (
-	// input
-    input logic clk_i, rstn_i,
-    input logic ct_i ,
-    input unsigned [7:0] a_i , b_i , q_i ,
-    
-    // output
-    output reg [15:0] x_o , y_o 
+/* verilator lint_off WIDTH */
+module top #(
+    parameter DATA_WIDTH=32
+) (
+    input logic clk_i ,
+    input logic [3:0] a_i , b_i ,
+    input logic        carry_i ,
+
+    output logic [3:0] sum_o,
+    output logic       carry_o 
 );
-	BLU dut(
-		.* 
-	);
+    Brent_Kung_adder dut (
+        .*
+    );
 
+    always @(posedge clk_i) begin
+        
+    end
 endmodule : top 
-
+/* verilator lint_on WIDTH */

@@ -31,7 +31,7 @@ void Vtop::eval_step() {
             Verilated::debug(1);
             __Vchange = _change_request(vlSymsp);
             Verilated::debug(__Vsaved_debug);
-            VL_FATAL_MT("top.sv", 1, "",
+            VL_FATAL_MT("top.sv", 2, "",
                 "Verilated model didn't converge\n"
                 "- See DIDNOTCONVERGE in the Verilator manual");
         } else {
@@ -57,7 +57,7 @@ void Vtop::_eval_initial_loop(Vtop__Syms* __restrict vlSymsp) {
             Verilated::debug(1);
             __Vchange = _change_request(vlSymsp);
             Verilated::debug(__Vsaved_debug);
-            VL_FATAL_MT("top.sv", 1, "",
+            VL_FATAL_MT("top.sv", 2, "",
                 "Verilated model didn't DC converge\n"
                 "- See DIDNOTCONVERGE in the Verilator manual");
         } else {
@@ -66,53 +66,64 @@ void Vtop::_eval_initial_loop(Vtop__Syms* __restrict vlSymsp) {
     } while (VL_UNLIKELY(__Vchange));
 }
 
-VL_INLINE_OPT void Vtop::_sequent__TOP__1(Vtop__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_sequent__TOP__1\n"); );
+VL_INLINE_OPT void Vtop::_combo__TOP__1(Vtop__Syms* __restrict vlSymsp) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_combo__TOP__1\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
-    if (vlTOPp->rstn_i) {
-        if (vlTOPp->ct_i) {
-            vlTOPp->x_o = (0xffffU & ((IData)(vlTOPp->top__DOT__dut__DOT__a_reg) 
-                                      + ((IData)(vlTOPp->top__DOT__dut__DOT__b_reg) 
-                                         * (IData)(vlTOPp->top__DOT__dut__DOT__q_reg))));
-            vlTOPp->y_o = (0xffffU & ((IData)(vlTOPp->top__DOT__dut__DOT__a_reg) 
-                                      - ((IData)(vlTOPp->top__DOT__dut__DOT__b_reg) 
-                                         * (IData)(vlTOPp->top__DOT__dut__DOT__q_reg))));
-        } else {
-            vlTOPp->x_o = (0xffffU & ((0xffffU & ((IData)(vlTOPp->top__DOT__dut__DOT__a_reg) 
-                                                  + (IData)(vlTOPp->top__DOT__dut__DOT__b_reg))) 
-                                      * (IData)(vlTOPp->top__DOT__dut__DOT__q_reg)));
-            vlTOPp->y_o = (0xffffU & ((0xffffU & ((IData)(vlTOPp->top__DOT__dut__DOT__a_reg) 
-                                                  - (IData)(vlTOPp->top__DOT__dut__DOT__b_reg))) 
-                                      * (IData)(vlTOPp->top__DOT__dut__DOT__q_reg)));
-        }
-    } else {
-        vlTOPp->x_o = 0U;
-        vlTOPp->y_o = 0U;
-    }
-    if (vlTOPp->rstn_i) {
-        vlTOPp->top__DOT__dut__DOT__a_reg = vlTOPp->a_i;
-        vlTOPp->top__DOT__dut__DOT__b_reg = vlTOPp->b_i;
-        vlTOPp->top__DOT__dut__DOT__q_reg = vlTOPp->q_i;
-    } else {
-        vlTOPp->top__DOT__dut__DOT__a_reg = 0U;
-        vlTOPp->top__DOT__dut__DOT__b_reg = 0U;
-        vlTOPp->top__DOT__dut__DOT__q_reg = 0U;
-    }
+    vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_1 
+        = ((IData)(vlTOPp->a_i) & (IData)(vlTOPp->b_i));
+    vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_1 
+        = ((IData)(vlTOPp->a_i) ^ (IData)(vlTOPp->b_i));
+    vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2 
+        = ((2U & (IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2)) 
+           | (1U & (((IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_1) 
+                     >> 1U) & (IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_1))));
+    vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2 
+        = ((1U & (IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2)) 
+           | (2U & (((IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_1) 
+                     >> 2U) & ((IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_1) 
+                               >> 1U))));
+    vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2 
+        = ((2U & (IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2)) 
+           | (1U & (((IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_1) 
+                     >> 1U) | (((IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_1) 
+                                >> 1U) & (IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_1)))));
+    vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2 
+        = ((1U & (IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2)) 
+           | (2U & (((IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_1) 
+                     >> 2U) | (((IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_1) 
+                                >> 2U) & ((IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_1) 
+                                          >> 1U)))));
+    vlTOPp->top__DOT__dut__DOT__C_gen = ((8U & (((IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2) 
+                                                 << 2U) 
+                                                | (((IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2) 
+                                                    << 2U) 
+                                                   & ((IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2) 
+                                                      << 3U)))) 
+                                         | ((4U & (
+                                                   (0xfffffffcU 
+                                                    & (IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_1)) 
+                                                   | (((IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2) 
+                                                       & (IData)(vlTOPp->carry_i)) 
+                                                      << 2U))) 
+                                            | ((2U 
+                                                & ((IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2) 
+                                                   << 1U)) 
+                                               | (1U 
+                                                  & (IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_1)))));
+    vlTOPp->carry_o = (1U & ((IData)(vlTOPp->top__DOT__dut__DOT__C_gen) 
+                             >> 3U));
+    vlTOPp->sum_o = ((IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_1) 
+                     ^ ((0xeU & ((IData)(vlTOPp->top__DOT__dut__DOT__C_gen) 
+                                 << 1U)) | (IData)(vlTOPp->carry_i)));
 }
 
 void Vtop::_eval(Vtop__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_eval\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
-    if ((((IData)(vlTOPp->clk_i) & (~ (IData)(vlTOPp->__Vclklast__TOP__clk_i))) 
-         | ((~ (IData)(vlTOPp->rstn_i)) & (IData)(vlTOPp->__Vclklast__TOP__rstn_i)))) {
-        vlTOPp->_sequent__TOP__1(vlSymsp);
-        vlTOPp->__Vm_traceActivity[1U] = 1U;
-    }
-    // Final
-    vlTOPp->__Vclklast__TOP__clk_i = vlTOPp->clk_i;
-    vlTOPp->__Vclklast__TOP__rstn_i = vlTOPp->rstn_i;
+    vlTOPp->_combo__TOP__1(vlSymsp);
+    vlTOPp->__Vm_traceActivity[1U] = 1U;
 }
 
 VL_INLINE_OPT QData Vtop::_change_request(Vtop__Syms* __restrict vlSymsp) {
@@ -137,9 +148,11 @@ void Vtop::_eval_debug_assertions() {
     // Body
     if (VL_UNLIKELY((clk_i & 0xfeU))) {
         Verilated::overWidthError("clk_i");}
-    if (VL_UNLIKELY((rstn_i & 0xfeU))) {
-        Verilated::overWidthError("rstn_i");}
-    if (VL_UNLIKELY((ct_i & 0xfeU))) {
-        Verilated::overWidthError("ct_i");}
+    if (VL_UNLIKELY((a_i & 0xf0U))) {
+        Verilated::overWidthError("a_i");}
+    if (VL_UNLIKELY((b_i & 0xf0U))) {
+        Verilated::overWidthError("b_i");}
+    if (VL_UNLIKELY((carry_i & 0xfeU))) {
+        Verilated::overWidthError("carry_i");}
 }
 #endif  // VL_DEBUG

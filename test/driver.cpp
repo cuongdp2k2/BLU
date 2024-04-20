@@ -1,56 +1,69 @@
-#define MAX_SIM 20
-
+#define MAX_SIM 200000
+#define Q_def ( 8380417 / 2 )
 void set_random(Vtop *dut, vluint64_t sim_unit) {
 // -----------------Random for test ----------------------------------------
-	//dut-> rstn_i = (sim_unit >= MAX_SIM / 4) ? 1 : 0 ;
-	dut->rstn_i = 1 ;
-	dut-> ct_i   = 0 ;
-	dut-> a_i    = rand() % (1<<31) ;
-	dut-> b_i    = rand() % (1<<31) ;
-	dut-> q_i    = rand() % (1<<31) ;
+	dut->a_i = rand()%16 ;
+	dut->b_i = rand()%16 ;
+	dut->carry_i = 0 ;
 
-	static int a_temp[2];
-	static int b_temp[2];
-	static int q_temp[2];
-	static unsigned int x_temp ;
-	static unsigned int y_temp ;
-	static int counter = 0 ;
-	
-	printf("--------------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("DUT DATA[%0d]        \n",counter);
-	printf("--------------------------------------------------------------------------------------------------------------------------------------\n");
-	printf("[%0ld] CURRENT DATA: a=%d , b=%d , c=%d , x=%d , y=%d\n", sim_unit, dut->a_i, dut->b_i, dut->q_i , dut->x_o , dut->y_o );
-	
-	if(sim_unit <= 1 ) {
-		a_temp[0] = dut->a_i ;
-		b_temp[0] = dut->b_i ;
-		q_temp[0] = dut->q_i ;
-	} else {
-		a_temp[1] = a_temp[0]  ;
-		b_temp[1] = b_temp[0]  ;
-		q_temp[1] = q_temp[0]  ;
-		a_temp[0] = dut->a_i   ;
-		b_temp[0] = dut->b_i   ;
-		q_temp[0] = dut->q_i   ;
-		x_temp = a_temp[1] + b_temp[1] * q_temp[1] ;
-		y_temp = a_temp[1] - b_temp[1] * q_temp[1] ;
+	// dut->data1_i = rand() % (1 << 31) ;
+	// dut->data2_i = rand() % (1 << 31) ;
+	// dut->w_i = rand() % (1 << 31) ;
 
-		printf("--------------------------------------------------------------------------------------------------------------------------------------\n");
-		
-		if(x_temp == dut->x_o) 
-			printf("\033[0;32mPASS X         \n\033[0m");	
-		else 
-			printf("\033[0;31mFAIL X         \n\033[0m");
+	// static int data1_temp = 0 ;
+	// static int data2_temp = 0 ;
+	// static int data1_pass = 0 , data1_fail = 0 ; 
+	// static int data2_pass = 0 , data2_fail = 0 ;
+	// static int reset_temp = 0 ;
+	// printf("----------------------------------------------------------------------------------------------------\n");
+	// if(reset_temp == 0){
+	// 	if(dut->data1_o == 0) {
+	// 		printf("[%ld] data1_i=%8x , data1_o=%8x -> PASS data_1 RESET\n",sim_unit*10+10,data1_temp,dut->data1_o) ;
+	// 		data1_pass ++ ;
+	// 	} else {
+	// 		printf("[%ld] data1_i=%8x , data1_o=%8x -> FAIL data_1 RESET\n",sim_unit*10+10,data1_temp,dut->data1_o) ;
+	// 		data1_fail ++ ;
+	// 	}
 
-		if( y_temp == dut->y_o ) 
-			printf("\033[0;32mPASS Y         \n\033[0m");
-		else 
-			printf("\033[0;31mFAIL Y         \n\033[0m");
-		
-		printf("[%0ld] STORED DATA: a=%d , b=%d , c=%d , x=%0d , y=%0d\n", sim_unit, a_temp[1], b_temp[1], q_temp[1] , x_temp , y_temp );
-		
-		printf("--------------------------------------------------------------------------------------------------------------------------------------\n");
-	}
-	counter ++ ;
+	// 	if(dut->data2_o == 0){
+	// 		printf("[%ld] data2_i=%8x , data2_o=%8x -> PASS data_2 RESET\n",sim_unit*10+10,data2_temp,dut->data2_o) ;
+	// 		data2_pass ++ ;
+	// 	} else {
+	// 		printf("[%ld] data2_i=%8x , data2_o=%8x -> FAIL data_2 RESET\n",sim_unit*10+10,data2_temp,dut->data2_o) ;
+	// 		data2_fail ++ ;
+	// 	}
+	// } else {
+	// 	if(data1_temp == dut->data1_o){
+	// 		printf("[%ld] data1_i=%8x , data1_o=%8x -> PASS data_1\n",sim_unit*10+10,data1_temp,dut->data1_o) ;
+	// 		data1_pass ++ ;
+	// 	}
+	// 	else {
+	// 		printf("[%ld] data1_i=%8x , data1_o=%8x -> FAIL data_1\n",sim_unit*10+10,data1_temp,dut->data1_o) ;
+	// 		data1_fail ++ ;
+	// 	}
 
+	// 	if(data2_temp == dut->data2_o){
+	// 		printf("[%ld] data2_i=%8x , data2_o=%8x -> PASS data_2\n",sim_unit*10+10,data2_temp,dut->data2_o) ;
+	// 		data2_pass ++ ;
+	// 	}
+	// 	else {
+	// 		printf("[%ld] data2_i=%8x , data2_o=%8x -> FAIL data_2\n",sim_unit*10+10,data2_temp,dut->data2_o) ;
+	// 		data2_fail ++ ;
+	// 	}
+	// }
+	// printf("----------------------------------------------------------------------------------------------------\n");
+
+
+    // if(sim_unit == MAX_SIM-1) {
+	// 	printf("-------------------------------------------------------------\n");
+	// 	printf("--------             TEST RESULT                   ----------\n");
+	// 	printf("-------------------------------------------------------------\n");
+	// 	printf("data1: %d passed test , %d failed test\n",data1_pass,data1_fail) ;
+	// 	printf("data2: %d passed test , %d failed test\n",data2_pass,data2_fail) ;
+	// 	printf("-------------------------------------------------------------\n");
+	// }
+
+	// data1_temp = dut->data1_i ;
+	// data2_temp = dut->data2_i ;
+	// reset_temp = dut->reset_ni ;
 }

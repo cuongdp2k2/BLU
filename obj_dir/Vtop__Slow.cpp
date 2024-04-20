@@ -31,9 +31,6 @@ Vtop::~Vtop() {
 void Vtop::_eval_initial(Vtop__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_eval_initial\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    vlTOPp->__Vclklast__TOP__clk_i = vlTOPp->clk_i;
-    vlTOPp->__Vclklast__TOP__rstn_i = vlTOPp->rstn_i;
 }
 
 void Vtop::final() {
@@ -46,22 +43,26 @@ void Vtop::final() {
 void Vtop::_eval_settle(Vtop__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_eval_settle\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
+    // Body
+    vlTOPp->_combo__TOP__1(vlSymsp);
+    vlTOPp->__Vm_traceActivity[1U] = 1U;
+    vlTOPp->__Vm_traceActivity[0U] = 1U;
 }
 
 void Vtop::_ctor_var_reset() {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_ctor_var_reset\n"); );
     // Body
     clk_i = VL_RAND_RESET_I(1);
-    rstn_i = VL_RAND_RESET_I(1);
-    ct_i = VL_RAND_RESET_I(1);
-    a_i = VL_RAND_RESET_I(8);
-    b_i = VL_RAND_RESET_I(8);
-    q_i = VL_RAND_RESET_I(8);
-    x_o = VL_RAND_RESET_I(16);
-    y_o = VL_RAND_RESET_I(16);
-    top__DOT__dut__DOT__a_reg = VL_RAND_RESET_I(9);
-    top__DOT__dut__DOT__b_reg = VL_RAND_RESET_I(9);
-    top__DOT__dut__DOT__q_reg = VL_RAND_RESET_I(9);
+    a_i = VL_RAND_RESET_I(4);
+    b_i = VL_RAND_RESET_I(4);
+    carry_i = VL_RAND_RESET_I(1);
+    sum_o = VL_RAND_RESET_I(4);
+    carry_o = VL_RAND_RESET_I(1);
+    top__DOT__dut__DOT__Propagate_sig_stg_1 = VL_RAND_RESET_I(4);
+    top__DOT__dut__DOT__Generate_sig_stg_1 = VL_RAND_RESET_I(4);
+    top__DOT__dut__DOT__Propagate_sig_stg_2 = VL_RAND_RESET_I(2);
+    top__DOT__dut__DOT__Generate_sig_stg_2 = VL_RAND_RESET_I(2);
+    top__DOT__dut__DOT__C_gen = VL_RAND_RESET_I(4);
     { int __Vi0=0; for (; __Vi0<2; ++__Vi0) {
             __Vm_traceActivity[__Vi0] = VL_RAND_RESET_I(1);
     }}

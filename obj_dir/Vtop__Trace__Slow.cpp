@@ -44,34 +44,31 @@ void Vtop::traceInitSub0(void* userp, VerilatedFst* tracep) {
     if (false && tracep && c) {}  // Prevent unused
     // Body
     {
-        tracep->declBit(c+4,"clk_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
-        tracep->declBit(c+5,"rstn_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
-        tracep->declBit(c+6,"ct_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
-        tracep->declBus(c+7,"a_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 7,0);
-        tracep->declBus(c+8,"b_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 7,0);
-        tracep->declBus(c+9,"q_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 7,0);
-        tracep->declBus(c+10,"x_o",-1,FST_VD_OUTPUT,FST_VT_VCD_WIRE, false,-1, 15,0);
-        tracep->declBus(c+11,"y_o",-1,FST_VD_OUTPUT,FST_VT_VCD_WIRE, false,-1, 15,0);
-        tracep->declBit(c+4,"top clk_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
-        tracep->declBit(c+5,"top rstn_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
-        tracep->declBit(c+6,"top ct_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
-        tracep->declBus(c+7,"top a_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 7,0);
-        tracep->declBus(c+8,"top b_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 7,0);
-        tracep->declBus(c+9,"top q_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 7,0);
-        tracep->declBus(c+10,"top x_o",-1,FST_VD_OUTPUT,FST_VT_VCD_WIRE, false,-1, 15,0);
-        tracep->declBus(c+11,"top y_o",-1,FST_VD_OUTPUT,FST_VT_VCD_WIRE, false,-1, 15,0);
-        tracep->declBus(c+12,"top dut WIDTH",-1, FST_VD_IMPLICIT,FST_VT_VCD_PARAMETER, false,-1, 31,0);
-        tracep->declBit(c+4,"top dut clk_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
-        tracep->declBit(c+5,"top dut rstn_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
-        tracep->declBit(c+6,"top dut ct_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
-        tracep->declBus(c+7,"top dut a_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 7,0);
-        tracep->declBus(c+8,"top dut b_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 7,0);
-        tracep->declBus(c+9,"top dut q_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 7,0);
-        tracep->declBus(c+10,"top dut x_o",-1,FST_VD_OUTPUT,FST_VT_VCD_WIRE, false,-1, 15,0);
-        tracep->declBus(c+11,"top dut y_o",-1,FST_VD_OUTPUT,FST_VT_VCD_WIRE, false,-1, 15,0);
-        tracep->declBus(c+1,"top dut a_reg",-1, FST_VD_IMPLICIT,FST_VT_SV_LOGIC, false,-1, 8,0);
-        tracep->declBus(c+2,"top dut b_reg",-1, FST_VD_IMPLICIT,FST_VT_SV_LOGIC, false,-1, 8,0);
-        tracep->declBus(c+3,"top dut q_reg",-1, FST_VD_IMPLICIT,FST_VT_SV_LOGIC, false,-1, 8,0);
+        tracep->declBit(c+8,"clk_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
+        tracep->declBus(c+9,"a_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 3,0);
+        tracep->declBus(c+10,"b_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 3,0);
+        tracep->declBit(c+11,"carry_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
+        tracep->declBus(c+12,"sum_o",-1,FST_VD_OUTPUT,FST_VT_VCD_WIRE, false,-1, 3,0);
+        tracep->declBit(c+13,"carry_o",-1,FST_VD_OUTPUT,FST_VT_VCD_WIRE, false,-1);
+        tracep->declBus(c+14,"top DATA_WIDTH",-1, FST_VD_IMPLICIT,FST_VT_VCD_PARAMETER, false,-1, 31,0);
+        tracep->declBit(c+8,"top clk_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
+        tracep->declBus(c+9,"top a_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 3,0);
+        tracep->declBus(c+10,"top b_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 3,0);
+        tracep->declBit(c+11,"top carry_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
+        tracep->declBus(c+12,"top sum_o",-1,FST_VD_OUTPUT,FST_VT_VCD_WIRE, false,-1, 3,0);
+        tracep->declBit(c+13,"top carry_o",-1,FST_VD_OUTPUT,FST_VT_VCD_WIRE, false,-1);
+        tracep->declBus(c+9,"top dut a_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 3,0);
+        tracep->declBus(c+10,"top dut b_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1, 3,0);
+        tracep->declBit(c+11,"top dut carry_i",-1,FST_VD_INPUT,FST_VT_VCD_WIRE, false,-1);
+        tracep->declBus(c+12,"top dut sum_o",-1,FST_VD_OUTPUT,FST_VT_VCD_WIRE, false,-1, 3,0);
+        tracep->declBit(c+13,"top dut carry_o",-1,FST_VD_OUTPUT,FST_VT_VCD_WIRE, false,-1);
+        tracep->declBus(c+1,"top dut Propagate_sig_stg_1",-1, FST_VD_IMPLICIT,FST_VT_SV_LOGIC, false,-1, 3,0);
+        tracep->declBus(c+2,"top dut Generate_sig_stg_1",-1, FST_VD_IMPLICIT,FST_VT_SV_LOGIC, false,-1, 3,0);
+        tracep->declBus(c+3,"top dut Propagate_sig_stg_2",-1, FST_VD_IMPLICIT,FST_VT_SV_LOGIC, false,-1, 1,0);
+        tracep->declBus(c+4,"top dut Generate_sig_stg_2",-1, FST_VD_IMPLICIT,FST_VT_SV_LOGIC, false,-1, 1,0);
+        tracep->declBit(c+5,"top dut Propagate_sig_stg_3",-1, FST_VD_IMPLICIT,FST_VT_SV_LOGIC, false,-1);
+        tracep->declBit(c+6,"top dut Generate_sig_stg_3",-1, FST_VD_IMPLICIT,FST_VT_SV_LOGIC, false,-1);
+        tracep->declBus(c+7,"top dut C_gen",-1, FST_VD_IMPLICIT,FST_VT_SV_LOGIC, false,-1, 3,0);
     }
 }
 
@@ -100,17 +97,23 @@ void Vtop::traceFullSub0(void* userp, VerilatedFst* tracep) {
     if (false && oldp) {}  // Prevent unused
     // Body
     {
-        tracep->fullSData(oldp+1,(vlTOPp->top__DOT__dut__DOT__a_reg),9);
-        tracep->fullSData(oldp+2,(vlTOPp->top__DOT__dut__DOT__b_reg),9);
-        tracep->fullSData(oldp+3,(vlTOPp->top__DOT__dut__DOT__q_reg),9);
-        tracep->fullBit(oldp+4,(vlTOPp->clk_i));
-        tracep->fullBit(oldp+5,(vlTOPp->rstn_i));
-        tracep->fullBit(oldp+6,(vlTOPp->ct_i));
-        tracep->fullCData(oldp+7,(vlTOPp->a_i),8);
-        tracep->fullCData(oldp+8,(vlTOPp->b_i),8);
-        tracep->fullCData(oldp+9,(vlTOPp->q_i),8);
-        tracep->fullSData(oldp+10,(vlTOPp->x_o),16);
-        tracep->fullSData(oldp+11,(vlTOPp->y_o),16);
-        tracep->fullIData(oldp+12,(8U),32);
+        tracep->fullCData(oldp+1,(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_1),4);
+        tracep->fullCData(oldp+2,(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_1),4);
+        tracep->fullCData(oldp+3,(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2),2);
+        tracep->fullCData(oldp+4,(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2),2);
+        tracep->fullBit(oldp+5,((1U & (((IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2) 
+                                        >> 1U) & (IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2)))));
+        tracep->fullBit(oldp+6,((1U & (((IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2) 
+                                        >> 1U) | (((IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2) 
+                                                   >> 1U) 
+                                                  & (IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2))))));
+        tracep->fullCData(oldp+7,(vlTOPp->top__DOT__dut__DOT__C_gen),4);
+        tracep->fullBit(oldp+8,(vlTOPp->clk_i));
+        tracep->fullCData(oldp+9,(vlTOPp->a_i),4);
+        tracep->fullCData(oldp+10,(vlTOPp->b_i),4);
+        tracep->fullBit(oldp+11,(vlTOPp->carry_i));
+        tracep->fullCData(oldp+12,(vlTOPp->sum_o),4);
+        tracep->fullBit(oldp+13,(vlTOPp->carry_o));
+        tracep->fullIData(oldp+14,(0x20U),32);
     }
 }

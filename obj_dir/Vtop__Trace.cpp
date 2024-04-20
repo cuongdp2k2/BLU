@@ -23,18 +23,25 @@ void Vtop::traceChgSub0(void* userp, VerilatedFst* tracep) {
     // Body
     {
         if (VL_UNLIKELY(vlTOPp->__Vm_traceActivity[1U])) {
-            tracep->chgSData(oldp+0,(vlTOPp->top__DOT__dut__DOT__a_reg),9);
-            tracep->chgSData(oldp+1,(vlTOPp->top__DOT__dut__DOT__b_reg),9);
-            tracep->chgSData(oldp+2,(vlTOPp->top__DOT__dut__DOT__q_reg),9);
+            tracep->chgCData(oldp+0,(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_1),4);
+            tracep->chgCData(oldp+1,(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_1),4);
+            tracep->chgCData(oldp+2,(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2),2);
+            tracep->chgCData(oldp+3,(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2),2);
+            tracep->chgBit(oldp+4,((1U & (((IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2) 
+                                           >> 1U) & (IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2)))));
+            tracep->chgBit(oldp+5,((1U & (((IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2) 
+                                           >> 1U) | 
+                                          (((IData)(vlTOPp->top__DOT__dut__DOT__Propagate_sig_stg_2) 
+                                            >> 1U) 
+                                           & (IData)(vlTOPp->top__DOT__dut__DOT__Generate_sig_stg_2))))));
+            tracep->chgCData(oldp+6,(vlTOPp->top__DOT__dut__DOT__C_gen),4);
         }
-        tracep->chgBit(oldp+3,(vlTOPp->clk_i));
-        tracep->chgBit(oldp+4,(vlTOPp->rstn_i));
-        tracep->chgBit(oldp+5,(vlTOPp->ct_i));
-        tracep->chgCData(oldp+6,(vlTOPp->a_i),8);
-        tracep->chgCData(oldp+7,(vlTOPp->b_i),8);
-        tracep->chgCData(oldp+8,(vlTOPp->q_i),8);
-        tracep->chgSData(oldp+9,(vlTOPp->x_o),16);
-        tracep->chgSData(oldp+10,(vlTOPp->y_o),16);
+        tracep->chgBit(oldp+7,(vlTOPp->clk_i));
+        tracep->chgCData(oldp+8,(vlTOPp->a_i),4);
+        tracep->chgCData(oldp+9,(vlTOPp->b_i),4);
+        tracep->chgBit(oldp+10,(vlTOPp->carry_i));
+        tracep->chgCData(oldp+11,(vlTOPp->sum_o),4);
+        tracep->chgBit(oldp+12,(vlTOPp->carry_o));
     }
 }
 

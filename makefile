@@ -70,6 +70,8 @@ clean:
 
 .PHONY: run
 run:
-	@make sim 
-	@make wave
-	@echo "----------------->  RUNNING  <--------------------"
+	@echo "-----------------> RUNNING       	 <--------------------"
+	@rm result
+	@make sim >> result
+	@echo "-----------------> RUN COMPLETED 	 <--------------------" 
+	@echo "-----------------> Please open result <--------------------"	

@@ -25,24 +25,22 @@ VL_MODULE(Vtop) {
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
     VL_IN8(clk_i,0,0);
-    VL_IN8(rstn_i,0,0);
-    VL_IN8(ct_i,0,0);
-    VL_IN8(a_i,7,0);
-    VL_IN8(b_i,7,0);
-    VL_IN8(q_i,7,0);
-    VL_OUT16(x_o,15,0);
-    VL_OUT16(y_o,15,0);
+    VL_IN8(a_i,3,0);
+    VL_IN8(b_i,3,0);
+    VL_IN8(carry_i,0,0);
+    VL_OUT8(sum_o,3,0);
+    VL_OUT8(carry_o,0,0);
     
     // LOCAL SIGNALS
     // Internals; generally not touched by application code
-    SData/*8:0*/ top__DOT__dut__DOT__a_reg;
-    SData/*8:0*/ top__DOT__dut__DOT__b_reg;
-    SData/*8:0*/ top__DOT__dut__DOT__q_reg;
+    CData/*3:0*/ top__DOT__dut__DOT__Propagate_sig_stg_1;
+    CData/*3:0*/ top__DOT__dut__DOT__Generate_sig_stg_1;
+    CData/*1:0*/ top__DOT__dut__DOT__Propagate_sig_stg_2;
+    CData/*1:0*/ top__DOT__dut__DOT__Generate_sig_stg_2;
+    CData/*3:0*/ top__DOT__dut__DOT__C_gen;
     
     // LOCAL VARIABLES
     // Internals; generally not touched by application code
-    CData/*0:0*/ __Vclklast__TOP__clk_i;
-    CData/*0:0*/ __Vclklast__TOP__rstn_i;
     CData/*0:0*/ __Vm_traceActivity[2];
     
     // INTERNAL VARIABLES
@@ -81,6 +79,9 @@ VL_MODULE(Vtop) {
   private:
     static QData _change_request(Vtop__Syms* __restrict vlSymsp);
     static QData _change_request_1(Vtop__Syms* __restrict vlSymsp);
+  public:
+    static void _combo__TOP__1(Vtop__Syms* __restrict vlSymsp);
+  private:
     void _ctor_var_reset() VL_ATTR_COLD;
   public:
     static void _eval(Vtop__Syms* __restrict vlSymsp);
@@ -91,7 +92,6 @@ VL_MODULE(Vtop) {
   public:
     static void _eval_initial(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
     static void _eval_settle(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
-    static void _sequent__TOP__1(Vtop__Syms* __restrict vlSymsp);
   private:
     static void traceChgSub0(void* userp, VerilatedFst* tracep);
     static void traceChgTop0(void* userp, VerilatedFst* tracep);
