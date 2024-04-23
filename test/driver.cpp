@@ -1,10 +1,34 @@
-#define MAX_SIM 200000
+#define MAX_SIM 2000
 #define Q_def ( 8380417 / 2 )
 void set_random(Vtop *dut, vluint64_t sim_unit) {
 // -----------------Random for test ----------------------------------------
-	dut->a_i = rand()%16 ;
-	dut->b_i = rand()%16 ;
+	dut->a_i = rand()%(1<<15) ;
+	dut->b_i = rand()%(1<<15) ;
 	dut->carry_i = 0 ;
+
+	static int a = 0 , b = 0 ;
+	static int testPassed = 0 , testFailed = 0 ;
+
+	if((dut->sum_o + dut->carry_o * 256) == a+b) {
+		testPassed ++ ;
+		printf("[%ld] a_i=%8x , b_i=%8x , sum_o = %8x , carry_o =%8x -> PASS\n",sim_unit*10+10,a,b,dut->sum_o,dut->carry_o) ;
+	}
+	else{
+		testFailed ++ ;
+		printf("[%ld] a_i=%8x , b_i=%8x , sum_o = %8x , carry_o =%8x -> FAIL\n",sim_unit*10+10,a,b,dut->sum_o,dut->carry_o) ;
+	}
+
+	if(sim_unit == MAX_SIM-1) {
+		printf("-------------------------------------------------------------\n");
+		printf("--------             TEST RESULT                   ----------\n");
+		printf("-------------------------------------------------------------\n");
+		printf("%d passed test , %d failed test\n",testPassed,testFailed) ;
+		printf("%d passed test , %d failed test\n",testPassed,testFailed) ;
+		printf("-------------------------------------------------------------\n");
+	}
+
+	a = dut->a_i ;
+	b = dut->b_i ;
 
 	// dut->data1_i = rand() % (1 << 31) ;
 	// dut->data2_i = rand() % (1 << 31) ;

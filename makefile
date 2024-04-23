@@ -75,3 +75,4 @@ run:
 	@make sim >> result
 	@echo "-----------------> RUN COMPLETED 	 <--------------------" 
 	@echo "-----------------> Please open result <--------------------"	
+	@cat result | grep FAIL
