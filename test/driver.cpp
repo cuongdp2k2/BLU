@@ -1,4 +1,4 @@
-#define MAX_SIM 200000
+#define MAX_SIM 20000
 #define Q_def 8380417  
 void set_random(Vtop *dut, vluint64_t sim_unit) {
 // -----------------Random for test ----------------------------------------
@@ -65,46 +65,46 @@ void set_random(Vtop *dut, vluint64_t sim_unit) {
 	dut->data1_i = rand() % (1 << 31) ;
 	dut->data2_i = rand() % (1 << 31) ;
 	dut->reset_ni = rand() % 2 ;
-	dut->w_i = rand() % (1 << 31) ;
+	dut->zeta_i = rand() % (1 << 31) ;
 
-	static int data1_temp = 0 ;
-	static int data2_temp = 0 ;
+	static long unsigned int  data1_temp = 0 ;
+	static long unsigned int  data2_temp = 0 ;
 	static int data1_pass = 0 , data1_fail = 0 ; 
 	static int data2_pass = 0 , data2_fail = 0 ;
 	static int reset_temp = 0 ;
 	printf("----------------------------------------------------------------------------------------------------\n");
 	if(reset_temp == 0){
 		if(dut->data1_o == 0) {
-			printf("[%ld] data1_i=%8x , data1_o=%8x -> PASS data_1 RESET\n",sim_unit*10+10,data1_temp,dut->data1_o) ;
+			printf("[%ld] data1_i=%16lx , data1_o=%16lx -> PASS data_1 RESET\n",sim_unit*10+10,data1_temp,dut->data1_o) ;
 			data1_pass ++ ;
 		} else {
-			printf("[%ld] data1_i=%8x , data1_o=%8x -> FAIL data_1 RESET\n",sim_unit*10+10,data1_temp,dut->data1_o) ;
+			printf("[%ld] data1_i=%16lx , data1_o=%16lx -> FAIL data_1 RESET\n",sim_unit*10+10,data1_temp,dut->data1_o) ;
 			data1_fail ++ ;
 		}
 
 		if(dut->data2_o == 0){
-			printf("[%ld] data2_i=%8x , data2_o=%8x -> PASS data_2 RESET\n",sim_unit*10+10,data2_temp,dut->data2_o) ;
+			printf("[%ld] data2_i=%16lx , data2_o=%16lx -> PASS data_2 RESET\n",sim_unit*10+10,data2_temp,dut->data2_o) ;
 			data2_pass ++ ;
 		} else {
-			printf("[%ld] data2_i=%8x , data2_o=%8x -> FAIL data_2 RESET\n",sim_unit*10+10,data2_temp,dut->data2_o) ;
+			printf("[%ld] data2_i=%16lx , data2_o=%16lx -> FAIL data_2 RESET\n",sim_unit*10+10,data2_temp,dut->data2_o) ;
 			data2_fail ++ ;
 		}
 	} else {
 		if(data1_temp == dut->data1_o){
-			printf("[%ld] data1_i=%8x , data1_o=%8x -> PASS data_1\n",sim_unit*10+10,data1_temp,dut->data1_o) ;
+			printf("[%ld] data1_i=%16lx , data1_o=%16lx -> PASS data_1\n",sim_unit*10+10,data1_temp,dut->data1_o) ;
 			data1_pass ++ ;
 		}
 		else {
-			printf("[%ld] data1_i=%8x , data1_o=%8x -> FAIL data_1\n",sim_unit*10+10,data1_temp,dut->data1_o) ;
+			printf("[%ld] data1_i=%16lx , data1_o=%16lx -> FAIL data_1\n",sim_unit*10+10,data1_temp,dut->data1_o) ;
 			data1_fail ++ ;
 		}
 
 		if(data2_temp == dut->data2_o){
-			printf("[%ld] data2_i=%8x , data2_o=%8x -> PASS data_2\n",sim_unit*10+10,data2_temp,dut->data2_o) ;
+			printf("[%ld] data2_i=%16lx , data2_o=%16lx -> PASS data_2\n",sim_unit*10+10,data2_temp,dut->data2_o) ;
 			data2_pass ++ ;
 		}
 		else {
-			printf("[%ld] data2_i=%8x , data2_o=%8x -> FAIL data_2\n",sim_unit*10+10,data2_temp,dut->data2_o) ;
+			printf("[%ld] data2_i=%16lx , data2_o=%16lx -> FAIL data_2\n",sim_unit*10+10,data2_temp,dut->data2_o) ;
 			data2_fail ++ ;
 		}
 	}

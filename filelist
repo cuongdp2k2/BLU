@@ -1,4 +1,3 @@
-./src/DigitalTop.sv
-./src/NTT_BU.sv
-./src/INTT_BU.sv
+./src/DigitalTop_v2.sv
+./src/BU2x2_Unit.sv
 ./src/ModulusComponent.sv

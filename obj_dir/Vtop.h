@@ -26,18 +26,18 @@ VL_MODULE(Vtop) {
     // propagate new values into/out from the Verilated model.
     VL_IN8(clk_i,0,0);
     VL_IN8(reset_ni,0,0);
-    VL_IN(data1_i,31,0);
-    VL_IN(data2_i,31,0);
-    VL_IN(w_i,31,0);
-    VL_OUT(data2_o,31,0);
-    VL_OUT(data1_o,31,0);
+    VL_IN(zeta_i,31,0);
+    VL_IN64(data1_i,63,0);
+    VL_IN64(data2_i,63,0);
+    VL_OUT64(data2_o,63,0);
+    VL_OUT64(data1_o,63,0);
     
     // LOCAL SIGNALS
     // Internals; generally not touched by application code
-    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__w_Q;
-    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__genW_Q__DOT__temp;
-    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__w_Q;
-    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__genW_Q__DOT__temp;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__zeta_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__mod_Q__DOT__temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__zeta_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__mod_Q__DOT__temp;
     QData/*63:0*/ top__DOT__dut__DOT__data1_intt;
     QData/*63:0*/ top__DOT__dut__DOT__data2_intt;
     QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__u;

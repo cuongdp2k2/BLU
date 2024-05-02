@@ -54,19 +54,19 @@ void Vtop::_ctor_var_reset() {
     // Body
     clk_i = VL_RAND_RESET_I(1);
     reset_ni = VL_RAND_RESET_I(1);
-    data1_i = VL_RAND_RESET_I(32);
-    data2_i = VL_RAND_RESET_I(32);
-    w_i = VL_RAND_RESET_I(32);
-    data2_o = VL_RAND_RESET_I(32);
-    data1_o = VL_RAND_RESET_I(32);
+    data1_i = VL_RAND_RESET_Q(64);
+    data2_i = VL_RAND_RESET_Q(64);
+    zeta_i = VL_RAND_RESET_I(32);
+    data2_o = VL_RAND_RESET_Q(64);
+    data1_o = VL_RAND_RESET_Q(64);
     top__DOT__dut__DOT__data1_intt = VL_RAND_RESET_Q(64);
     top__DOT__dut__DOT__data2_intt = VL_RAND_RESET_Q(64);
+    top__DOT__dut__DOT__ntt_comp__DOT__zeta_temp = VL_RAND_RESET_I(32);
     top__DOT__dut__DOT__ntt_comp__DOT__u = VL_RAND_RESET_Q(64);
     top__DOT__dut__DOT__ntt_comp__DOT__t = VL_RAND_RESET_Q(64);
-    top__DOT__dut__DOT__ntt_comp__DOT__w_Q = VL_RAND_RESET_I(32);
-    top__DOT__dut__DOT__ntt_comp__DOT__genW_Q__DOT__temp = VL_RAND_RESET_I(32);
-    top__DOT__dut__DOT__intt_comp__DOT__w_Q = VL_RAND_RESET_I(32);
-    top__DOT__dut__DOT__intt_comp__DOT__genW_Q__DOT__temp = VL_RAND_RESET_I(32);
+    top__DOT__dut__DOT__ntt_comp__DOT__mod_Q__DOT__temp = VL_RAND_RESET_I(32);
+    top__DOT__dut__DOT__intt_comp__DOT__zeta_temp = VL_RAND_RESET_I(32);
+    top__DOT__dut__DOT__intt_comp__DOT__mod_Q__DOT__temp = VL_RAND_RESET_I(32);
     { int __Vi0=0; for (; __Vi0<2; ++__Vi0) {
             __Vm_traceActivity[__Vi0] = VL_RAND_RESET_I(1);
     }}
