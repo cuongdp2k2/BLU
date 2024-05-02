@@ -25,54 +25,32 @@ VL_MODULE(Vtop) {
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
     VL_IN8(clk_i,0,0);
-    VL_IN8(carry_i,0,0);
-    VL_OUT8(carry_o,0,0);
-    VL_IN16(a_i,15,0);
-    VL_IN16(b_i,15,0);
-    VL_OUT16(sum_o,15,0);
+    VL_IN8(reset_ni,0,0);
+    VL_IN(data1_i,31,0);
+    VL_IN(data2_i,31,0);
+    VL_IN(w_i,31,0);
+    VL_OUT(data2_o,31,0);
+    VL_OUT(data1_o,31,0);
     
     // LOCAL SIGNALS
     // Internals; generally not touched by application code
-    CData/*7:0*/ top__DOT__dut__DOT__P_stg2;
-    CData/*7:0*/ top__DOT__dut__DOT__G_stg2;
-    CData/*3:0*/ top__DOT__dut__DOT__P_stg3;
-    CData/*3:0*/ top__DOT__dut__DOT__G_stg3;
-    CData/*1:0*/ top__DOT__dut__DOT__P_stg4;
-    CData/*1:0*/ top__DOT__dut__DOT__G_stg4;
-    CData/*0:0*/ top__DOT__dut__DOT__P_stg6;
-    CData/*0:0*/ top__DOT__dut__DOT__G_stg6;
-    CData/*2:0*/ top__DOT__dut__DOT__P_stg7;
-    CData/*2:0*/ top__DOT__dut__DOT__G_stg7;
-    CData/*7:0*/ top__DOT__dut__DOT__P_stg8;
-    CData/*7:0*/ top__DOT__dut__DOT__G_stg8;
-    SData/*15:0*/ top__DOT__dut__DOT__P_stg1;
-    SData/*15:0*/ top__DOT__dut__DOT__G_stg1;
-    SData/*15:0*/ top__DOT__dut__DOT__C;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__w_Q;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__genW_Q__DOT__temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__w_Q;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__genW_Q__DOT__temp;
+    QData/*63:0*/ top__DOT__dut__DOT__data1_intt;
+    QData/*63:0*/ top__DOT__dut__DOT__data2_intt;
+    QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__u;
+    QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__t;
+    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__u;
+    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__t;
+    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__half_u;
+    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__half_t;
+    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__intt_data1_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__intt_data2_temp;
     
     // LOCAL VARIABLES
     // Internals; generally not touched by application code
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage6_dot__G_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage6_dot__P_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage7_dot1__G_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage7_dot1__P_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage7_dot2__G_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage7_dot2__P_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage7_dot3__G_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage7_dot3__P_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot2__G_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot2__P_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot3__G_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot3__P_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot4__G_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot4__P_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot5__G_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot5__P_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot6__G_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot6__P_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot7__G_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot7__P_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot8__G_i;
-    CData/*1:0*/ top__DOT__dut__DOT____Vcellinp__stage8_dot8__P_i;
     CData/*0:0*/ __Vm_traceActivity[2];
     
     // INTERNAL VARIABLES

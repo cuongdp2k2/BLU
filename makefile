@@ -71,8 +71,8 @@ clean:
 .PHONY: run
 run:
 	@echo "-----------------> RUNNING       	 <--------------------"
-	@rm result
-	@make sim >> result
+	@make sim > result
 	@echo "-----------------> RUN COMPLETED 	 <--------------------" 
 	@echo "-----------------> Please open result <--------------------"	
 	@cat result | grep FAIL
+	@grep -A4 -B1 "RESULT" result

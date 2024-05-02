@@ -1,1 +1,4 @@
-./src/BK_adder_16bit.sv
+./src/DigitalTop.sv
+./src/NTT_BU.sv
+./src/INTT_BU.sv
+./src/ModulusComponent.sv

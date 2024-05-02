@@ -12,7 +12,11 @@ module NTT_BU #(
     logic  [2*DATA_WIDTH-1:0] t ;
     logic  [DATA_WIDTH-1:0] w_Q ;
 
-    assign w_Q = w_i % Val_Q ;
+    // assign w_Q = w_i % Val_Q ;
+    ModulusComponent genW_Q (
+        .A_i(w_i) ,
+        .A_o(w_Q)
+    );
 
     always_comb begin : ntt_comp
         if(!reset_ni) begin

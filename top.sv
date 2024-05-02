@@ -2,14 +2,12 @@
 module top #(
     parameter DATA_WIDTH=32
 ) (
-    input logic clk_i ,
-    input logic [15:0] a_i , b_i ,
-    input logic       carry_i ,
+    input logic clk_i , reset_ni ,
+    input logic [DATA_WIDTH-1:0] data1_i , data2_i , w_i ,
 
-    output logic [15:0] sum_o ,
-    output logic       carry_o
+    output logic [DATA_WIDTH-1:0] data2_o , data1_o 
 );
-    BK_adder_16bit dut (
+    DigitalTop dut (
         .*
     );
 
