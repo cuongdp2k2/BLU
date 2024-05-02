@@ -23,23 +23,32 @@ module INTT_BU #(
         .A_o(w_Q)
     );
 
-    always_comb begin : NTT
-        if(!reset_ni) begin
-            intt_data1_o = 0 ;
-            intt_data2_o = 0 ;
-        end else begin
-            u = data1_i + data2_i ;
-            t = data1_i - data2_i ;
-            half_u = u / 2 ;
-            half_t = t / 2 ;
-            intt_data1_temp = half_u ;
-            intt_data2_temp = ( half_t / {{32{w_Q[DATA_WIDTH-1]}},w_Q} ) ;
+    // always_comb begin : NTT
+    //     if(!reset_ni) begin
+    //         intt_data1_o = 0 ;
+    //         intt_data2_o = 0 ;
+    //     end else begin
+    //         u = data1_i + data2_i ;
+    //         t = data1_i - data2_i ;
+    //         half_u = u / 2 ;
+    //         half_t = t / 2 ;
+    //         intt_data1_temp = half_u ;
+    //         intt_data2_temp = ( half_t / {{32{w_Q[DATA_WIDTH-1]}},w_Q} ) ;
 
-            intt_data1_o = intt_data1_temp[31:0] ;
-            intt_data2_o = intt_data2_temp[31:0] ;
-        end
-    end
+    //         intt_data1_o = intt_data1_temp[31:0] ;
+    //         intt_data2_o = intt_data2_temp[31:0] ;
+    //     end
+    // end
     
+    assign u = data1_i + data2_i ;
+    assign t = data1_i - data2_i ;
+    assign half_u = u >> 1 ;
+    assign half_t = t >> 1 ;
+    assign intt_data1_temp = half_u ;
+    assign intt_data2_temp = ( half_t / {{32{w_Q[DATA_WIDTH-1]}},w_Q} ) ;
+    assign intt_data1_o = (reset_ni) ? intt_data1_temp[31:0] : 0 ;
+    assign intt_data2_o = (reset_ni) ? intt_data2_temp[31:0] : 0 ;
+
 endmodule : INTT_BU 
 /* verilator lint_on WIDTH */
 /* verilator lint_on UNUSED */

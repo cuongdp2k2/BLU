@@ -42,12 +42,6 @@ VL_MODULE(Vtop) {
     QData/*63:0*/ top__DOT__dut__DOT__data2_intt;
     QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__u;
     QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__t;
-    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__u;
-    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__t;
-    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__half_u;
-    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__half_t;
-    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__intt_data1_temp;
-    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__intt_data2_temp;
     
     // LOCAL VARIABLES
     // Internals; generally not touched by application code

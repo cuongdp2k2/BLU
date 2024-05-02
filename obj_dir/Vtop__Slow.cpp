@@ -65,12 +65,6 @@ void Vtop::_ctor_var_reset() {
     top__DOT__dut__DOT__ntt_comp__DOT__t = VL_RAND_RESET_Q(64);
     top__DOT__dut__DOT__ntt_comp__DOT__w_Q = VL_RAND_RESET_I(32);
     top__DOT__dut__DOT__ntt_comp__DOT__genW_Q__DOT__temp = VL_RAND_RESET_I(32);
-    top__DOT__dut__DOT__intt_comp__DOT__u = VL_RAND_RESET_Q(64);
-    top__DOT__dut__DOT__intt_comp__DOT__t = VL_RAND_RESET_Q(64);
-    top__DOT__dut__DOT__intt_comp__DOT__half_u = VL_RAND_RESET_Q(64);
-    top__DOT__dut__DOT__intt_comp__DOT__half_t = VL_RAND_RESET_Q(64);
-    top__DOT__dut__DOT__intt_comp__DOT__intt_data1_temp = VL_RAND_RESET_Q(64);
-    top__DOT__dut__DOT__intt_comp__DOT__intt_data2_temp = VL_RAND_RESET_Q(64);
     top__DOT__dut__DOT__intt_comp__DOT__w_Q = VL_RAND_RESET_I(32);
     top__DOT__dut__DOT__intt_comp__DOT__genW_Q__DOT__temp = VL_RAND_RESET_I(32);
     { int __Vi0=0; for (; __Vi0<2; ++__Vi0) {

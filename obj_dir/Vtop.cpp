@@ -76,56 +76,40 @@ VL_INLINE_OPT void Vtop::_combo__TOP__1(Vtop__Syms* __restrict vlSymsp) {
         = (VL_LTES_III(1,32,32, 0U, vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__genW_Q__DOT__temp)
             ? vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__genW_Q__DOT__temp
             : ((IData)(0x7fe001U) + vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__genW_Q__DOT__temp));
+    vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__u = 
+        (((QData)((IData)((- (IData)((1U & (vlTOPp->data1_i 
+                                            >> 0x1fU)))))) 
+          << 0x20U) | (QData)((IData)(vlTOPp->data1_i)));
     vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__genW_Q__DOT__temp 
         = (vlTOPp->w_i - ((IData)(0x7fe001U) * VL_DIV_III(32, vlTOPp->w_i, (IData)(0x7fe001U))));
     vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__w_Q 
         = (VL_LTES_III(1,32,32, 0U, vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__genW_Q__DOT__temp)
             ? vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__genW_Q__DOT__temp
             : ((IData)(0x7fe001U) + vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__genW_Q__DOT__temp));
+    vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__t = 
+        ((QData)((IData)(vlTOPp->data2_i)) * (QData)((IData)(vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__w_Q)));
     if (vlTOPp->reset_ni) {
-        vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__u 
-            = (((QData)((IData)((- (IData)((1U & (vlTOPp->data1_i 
-                                                  >> 0x1fU)))))) 
-                << 0x20U) | (QData)((IData)(vlTOPp->data1_i)));
-        vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__t 
-            = ((QData)((IData)(vlTOPp->data2_i)) * (QData)((IData)(vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__w_Q)));
         vlTOPp->top__DOT__dut__DOT__data1_intt = (vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__u 
                                                   + vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__t);
         vlTOPp->top__DOT__dut__DOT__data2_intt = (vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__u 
                                                   - vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__t);
+        vlTOPp->data1_o = (IData)(((vlTOPp->top__DOT__dut__DOT__data1_intt 
+                                    + vlTOPp->top__DOT__dut__DOT__data2_intt) 
+                                   >> 1U));
+        vlTOPp->data2_o = (IData)(VL_DIV_QQQ(64, ((vlTOPp->top__DOT__dut__DOT__data1_intt 
+                                                   - vlTOPp->top__DOT__dut__DOT__data2_intt) 
+                                                  >> 1U), 
+                                             (((QData)((IData)(
+                                                               (- (IData)(
+                                                                          (1U 
+                                                                           & (vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__w_Q 
+                                                                              >> 0x1fU)))))) 
+                                               << 0x20U) 
+                                              | (QData)((IData)(vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__w_Q)))));
     } else {
         vlTOPp->top__DOT__dut__DOT__data1_intt = 0ULL;
         vlTOPp->top__DOT__dut__DOT__data2_intt = 0ULL;
-    }
-    if (vlTOPp->reset_ni) {
-        vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__u 
-            = (vlTOPp->top__DOT__dut__DOT__data1_intt 
-               + vlTOPp->top__DOT__dut__DOT__data2_intt);
-        vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__half_u 
-            = (vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__u 
-               >> 1U);
-        vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__intt_data1_temp 
-            = vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__half_u;
-        vlTOPp->data1_o = (IData)(vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__intt_data1_temp);
-    } else {
         vlTOPp->data1_o = 0U;
-    }
-    if (vlTOPp->reset_ni) {
-        vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__t 
-            = (vlTOPp->top__DOT__dut__DOT__data1_intt 
-               - vlTOPp->top__DOT__dut__DOT__data2_intt);
-        vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__half_t 
-            = (vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__t 
-               >> 1U);
-        vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__intt_data2_temp 
-            = VL_DIV_QQQ(64, vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__half_t, 
-                         (((QData)((IData)((- (IData)(
-                                                      (1U 
-                                                       & (vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__w_Q 
-                                                          >> 0x1fU)))))) 
-                           << 0x20U) | (QData)((IData)(vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__w_Q))));
-        vlTOPp->data2_o = (IData)(vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__intt_data2_temp);
-    } else {
         vlTOPp->data2_o = 0U;
     }
 }
