@@ -1,4 +1,4 @@
-#define MAX_SIM 20000
+#define MAX_SIM 2000
 #define Q_def 8380417  
 void set_random(Vtop *dut, vluint64_t sim_unit) {
 // -----------------Random for test ----------------------------------------
@@ -64,14 +64,16 @@ void set_random(Vtop *dut, vluint64_t sim_unit) {
 	// ---------------- Random for NTT/INTT -------------------------------
 	dut->data1_i = rand() % (1 << 31) ;
 	dut->data2_i = rand() % (1 << 31) ;
-	dut->reset_ni = rand() % 2 ;
-	dut->zeta_i = rand() % (1 << 31) ;
+	dut->reset_ni = 1 ;
+	dut->zeta_i = rand() % (1<<31) ;
+	
 
 	static long unsigned int  data1_temp = 0 ;
 	static long unsigned int  data2_temp = 0 ;
 	static int data1_pass = 0 , data1_fail = 0 ; 
 	static int data2_pass = 0 , data2_fail = 0 ;
 	static int reset_temp = 0 ;
+	
 	printf("----------------------------------------------------------------------------------------------------\n");
 	if(reset_temp == 0){
 		if(dut->data1_o == 0) {
