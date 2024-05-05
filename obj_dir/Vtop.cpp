@@ -70,52 +70,17 @@ VL_INLINE_OPT void Vtop::_combo__TOP__1(Vtop__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop::_combo__TOP__1\n"); );
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
-    vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__mod_Q__DOT__temp 
-        = (vlTOPp->zeta_i - ((IData)(0x7fe001U) * VL_DIV_III(32, vlTOPp->zeta_i, (IData)(0x7fe001U))));
-    vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__zeta_temp 
-        = (VL_LTES_III(1,32,32, 0U, vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__mod_Q__DOT__temp)
-            ? vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__mod_Q__DOT__temp
-            : ((IData)(0x7fe001U) + vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__mod_Q__DOT__temp));
-    vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__u = 
-        (((QData)((IData)((- (IData)((1U & (IData)(
-                                                   (vlTOPp->data1_i 
-                                                    >> 0x1fU))))))) 
-          << 0x20U) | (QData)((IData)(vlTOPp->data1_i)));
-    vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__mod_Q__DOT__temp 
-        = (vlTOPp->zeta_i - ((IData)(0x7fe001U) * VL_DIV_III(32, vlTOPp->zeta_i, (IData)(0x7fe001U))));
-    vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__zeta_temp 
-        = (VL_LTES_III(1,32,32, 0U, vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__mod_Q__DOT__temp)
-            ? vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__mod_Q__DOT__temp
-            : ((IData)(0x7fe001U) + vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__mod_Q__DOT__temp));
-    vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__t = 
-        ((QData)((IData)(vlTOPp->data2_i)) * ((0x80000000U 
-                                               & vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__zeta_temp)
-                                               ? (0xffffffff00000000ULL 
-                                                  | (QData)((IData)(vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__zeta_temp)))
-                                               : (QData)((IData)(vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__zeta_temp))));
-    if (vlTOPp->reset_ni) {
-        vlTOPp->top__DOT__dut__DOT__data1_intt = (vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__u 
-                                                  + vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__t);
-        vlTOPp->top__DOT__dut__DOT__data2_intt = (vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__u 
-                                                  - vlTOPp->top__DOT__dut__DOT__ntt_comp__DOT__t);
-        vlTOPp->data1_o = ((vlTOPp->top__DOT__dut__DOT__data1_intt 
-                            + vlTOPp->top__DOT__dut__DOT__data2_intt) 
-                           >> 1U);
-        vlTOPp->data2_o = VL_DIV_QQQ(64, ((vlTOPp->top__DOT__dut__DOT__data1_intt 
-                                           - vlTOPp->top__DOT__dut__DOT__data2_intt) 
-                                          >> 1U), (
-                                                   (0x80000000U 
-                                                    & vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__zeta_temp)
-                                                    ? 
-                                                   (0xffffffff00000000ULL 
-                                                    | (QData)((IData)(vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__zeta_temp)))
-                                                    : (QData)((IData)(vlTOPp->top__DOT__dut__DOT__intt_comp__DOT__zeta_temp))));
-    } else {
-        vlTOPp->top__DOT__dut__DOT__data1_intt = 0ULL;
-        vlTOPp->top__DOT__dut__DOT__data2_intt = 0ULL;
-        vlTOPp->data1_o = 0ULL;
-        vlTOPp->data2_o = 0ULL;
-    }
+    vlTOPp->top__DOT__dut__DOT__reduce32_comp__DOT__A_o_temp 
+        = (vlTOPp->A_i - ((IData)(0x7fe001U) * (((IData)(0x400000U) 
+                                                 + vlTOPp->A_i) 
+                                                >> 0x17U)));
+    vlTOPp->top__DOT__dut__DOT__A_wire = (VL_LTES_III(1,32,32, 0U, vlTOPp->top__DOT__dut__DOT__reduce32_comp__DOT__A_o_temp)
+                                           ? vlTOPp->top__DOT__dut__DOT__reduce32_comp__DOT__A_o_temp
+                                           : ((IData)(0x7fe001U) 
+                                              + vlTOPp->top__DOT__dut__DOT__reduce32_comp__DOT__A_o_temp));
+    vlTOPp->A_o = (vlTOPp->top__DOT__dut__DOT__A_wire 
+                   + (0x7fe001U & (vlTOPp->top__DOT__dut__DOT__A_wire 
+                                   >> 0x1fU)));
 }
 
 void Vtop::_eval(Vtop__Syms* __restrict vlSymsp) {
@@ -123,7 +88,6 @@ void Vtop::_eval(Vtop__Syms* __restrict vlSymsp) {
     Vtop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
     vlTOPp->_combo__TOP__1(vlSymsp);
-    vlTOPp->__Vm_traceActivity[1U] = 1U;
 }
 
 VL_INLINE_OPT QData Vtop::_change_request(Vtop__Syms* __restrict vlSymsp) {
@@ -148,7 +112,5 @@ void Vtop::_eval_debug_assertions() {
     // Body
     if (VL_UNLIKELY((clk_i & 0xfeU))) {
         Verilated::overWidthError("clk_i");}
-    if (VL_UNLIKELY((reset_ni & 0xfeU))) {
-        Verilated::overWidthError("reset_ni");}
 }
 #endif  // VL_DEBUG

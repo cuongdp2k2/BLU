@@ -34,11 +34,12 @@ module reduce32 #(
 
     output logic [31:0] A_o 
 ) ;
-    logic [31:0] t        ;
+    logic signed [31:0] t        ;
+    logic signed [31:0] A_o_temp ;
 
     assign t = (A_i + (1 << 22)) >> 23;
-    assign A_o = A_i - t*Q;
-
+    assign A_o_temp = A_i - t*Q;
+    assign A_o = (A_o_temp >= 0) ? A_o_temp :  A_o_temp + Q;
 endmodule : reduce32 
 
 module caddq#(
@@ -61,12 +62,7 @@ module Modulus#(
 
     output logic [31:0] A_o
 );
-    logic [31:0] A_wire ;
-    // logic [31:0] A_temp ; 
-    // MontRED mont_comp (
-    //     .A_i (A_i),
-    //     .A_o (A_temp)
-    // ) ;
+    logic signed [31:0] A_wire ;
 
     reduce32 reduce32_comp(
         .A_i(A_i)  ,
@@ -76,6 +72,8 @@ module Modulus#(
         .A_i(A_wire) ,
         .A_o(A_o)
     ) ;
+
+    
 endmodule : Modulus
 
 /* verilator lint_on UNUSED */

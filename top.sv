@@ -1,14 +1,14 @@
 /* verilator lint_off WIDTH */
 module top #(
-    parameter DATA_WIDTH=64
-) (
-    input logic clk_i , reset_ni ,
-    input logic [DATA_WIDTH-1:0] data1_i , data2_i , 
-    input logic [(DATA_WIDTH/2)-1:0] zeta_i ,
+    parameter QINV = 58728449 ,
+    parameter Q    = 8380417  
+)(
+    input logic  clk_i ,
+    input logic  [31:0] A_i ,
 
-    output logic [DATA_WIDTH-1:0] data2_o , data1_o 
+    output logic [31:0] A_o
 );
-    DigitalTop_v2 dut (
+    Modulus dut (
         .*
     );
 

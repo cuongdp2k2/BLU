@@ -18,7 +18,7 @@ module BU2x2_Unit #(
     logic [2*DATA_WIDTH-1:0] data2_o_temp ;
 
     // Stage_1
-    ModulusComponent mod_Q (
+    Modulus mod_Q (
         .A_i(zeta_i) ,
         .A_o(zeta_temp)
     );

@@ -25,27 +25,17 @@ VL_MODULE(Vtop) {
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
     VL_IN8(clk_i,0,0);
-    VL_IN8(reset_ni,0,0);
-    VL_IN(zeta_i,31,0);
-    VL_IN64(data1_i,63,0);
-    VL_IN64(data2_i,63,0);
-    VL_OUT64(data2_o,63,0);
-    VL_OUT64(data1_o,63,0);
+    VL_IN(A_i,31,0);
+    VL_OUT(A_o,31,0);
     
     // LOCAL SIGNALS
     // Internals; generally not touched by application code
-    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__zeta_temp;
-    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__mod_Q__DOT__temp;
-    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__zeta_temp;
-    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__mod_Q__DOT__temp;
-    QData/*63:0*/ top__DOT__dut__DOT__data1_intt;
-    QData/*63:0*/ top__DOT__dut__DOT__data2_intt;
-    QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__u;
-    QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__t;
+    IData/*31:0*/ top__DOT__dut__DOT__A_wire;
+    IData/*31:0*/ top__DOT__dut__DOT__reduce32_comp__DOT__A_o_temp;
     
     // LOCAL VARIABLES
     // Internals; generally not touched by application code
-    CData/*0:0*/ __Vm_traceActivity[2];
+    CData/*0:0*/ __Vm_traceActivity[1];
     
     // INTERNAL VARIABLES
     // Internals; generally not touched by application code

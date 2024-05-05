@@ -1,3 +1,1 @@
-./src/DigitalTop_v2.sv
-./src/BU2x2_Unit.sv
-./src/ModulusComponent.sv
+./src/Modulus.sv

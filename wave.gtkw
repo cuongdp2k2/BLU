@@ -1,10 +1,10 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Mon Apr 15 16:20:34 2024
+[*] Sat May  4 15:42:18 2024
 [*]
 [dumpfile] "/home/dpcuong/FIPS204/workspace/wave.fst"
-[dumpfile_mtime] "Mon Apr 15 16:20:30 2024"
-[dumpfile_size] 7960
+[dumpfile_mtime] "Sat May  4 15:41:40 2024"
+[dumpfile_size] 51252
 [savefile] "/home/dpcuong/FIPS204/workspace/wave.gtkw"
 [timestart] 0
 [size] 1908 999
@@ -17,36 +17,12 @@
 [signals_width] 254
 [sst_expanded] 1
 [sst_vpaned_height] 292
-@28
-TOP.top.dut.ntt_comp.reset_ni
-@420
-TOP.top.dut.ntt_comp.DATA_WIDTH
-TOP.top.dut.ntt_comp.Val_Q
 @22
-TOP.top.dut.ntt_comp.data1_i[31:0]
-TOP.top.dut.ntt_comp.data2_i[31:0]
-TOP.top.dut.ntt_comp.w_i[31:0]
-TOP.top.dut.ntt_comp.u[63:0]
-TOP.top.dut.ntt_comp.t[63:0]
-TOP.top.dut.ntt_comp.w_Q[31:0]
-TOP.top.dut.ntt_comp.ntt_data1_o[63:0]
-TOP.top.dut.ntt_comp.ntt_data2_o[63:0]
-@28
-TOP.top.dut.intt_comp.reset_ni
-@420
-TOP.top.dut.intt_comp.DATA_WIDTH
-TOP.top.dut.intt_comp.Val_Q
-@22
-TOP.top.dut.intt_comp.data1_i[63:0]
-TOP.top.dut.intt_comp.data2_i[63:0]
-TOP.top.dut.intt_comp.w_i[31:0]
-TOP.top.dut.intt_comp.u[63:0]
-TOP.top.dut.intt_comp.t[63:0]
-TOP.top.dut.intt_comp.half_u[63:0]
-TOP.top.dut.intt_comp.half_t[63:0]
-TOP.top.dut.intt_comp.intt_data1_temp[63:0]
-TOP.top.dut.intt_comp.intt_data2_temp[63:0]
-TOP.top.dut.intt_comp.intt_data1_o[31:0]
-TOP.top.dut.intt_comp.intt_data2_o[31:0]
+TOP.top.dut.A_i[63:0]
+TOP.top.dut.a_temp[63:0]
+TOP.top.dut.t_temp1[63:0]
+TOP.top.dut.t_temp2[63:0]
+@23
+TOP.top.dut.A_o[31:0]
 [pattern_trace] 1
 [pattern_trace] 0
