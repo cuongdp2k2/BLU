@@ -1,1 +1,3 @@
+./src/BU_new.sv
 ./src/Modulus.sv
+./src/DigitalTop_v3.sv

@@ -25,17 +25,76 @@ VL_MODULE(Vtop) {
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
     VL_IN8(clk_i,0,0);
-    VL_IN(A_i,31,0);
-    VL_OUT(A_o,31,0);
+    VL_IN8(reset_ni,0,0);
+    VL_IN(data1_i,31,0);
+    VL_IN(data2_i,31,0);
+    VL_IN(zeta_i,31,0);
+    VL_OUT(data2_o,31,0);
+    VL_OUT(data1_o,31,0);
     
     // LOCAL SIGNALS
     // Internals; generally not touched by application code
-    IData/*31:0*/ top__DOT__dut__DOT__A_wire;
-    IData/*31:0*/ top__DOT__dut__DOT__reduce32_comp__DOT__A_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__u_i_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__t_i_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__w_i_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__u_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__t_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__u_reduce32;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__u_temp2;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__t_temp2;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__mult_reduce;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__add2modular;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__sub2modular;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Red_u2Q__DOT__A_wire;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Red_u2Q__DOT__reduce32_comp__DOT__A_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Red_t2Q__DOT__A_wire;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Red_t2Q__DOT__reduce32_comp__DOT__A_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Red_w2Q__DOT__A_wire;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Red_w2Q__DOT__reduce32_comp__DOT__A_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Add_Modular__DOT__A_wire;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Add_Modular__DOT__reduce32_comp__DOT__A_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Sub_Modular__DOT__A_wire;
+    IData/*31:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Sub_Modular__DOT__reduce32_comp__DOT__A_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__u_i_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__t_i_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__w_i_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__u_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__t_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__u_reduce32;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__t_reduce32;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__u_temp2;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__t_temp2;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__sub_reduce;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__mult_reduce;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__add2modular;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__sub2modular;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__Red_u2Q__DOT__A_wire;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__Red_u2Q__DOT__reduce32_comp__DOT__A_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__Red_t2Q__DOT__A_wire;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__Red_t2Q__DOT__reduce32_comp__DOT__A_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__Red_w2Q__DOT__A_wire;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__Red_w2Q__DOT__reduce32_comp__DOT__A_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__Add_Modular__DOT__A_wire;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__Add_Modular__DOT__reduce32_comp__DOT__A_o_temp;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__Sub_Modular__DOT__A_wire;
+    IData/*31:0*/ top__DOT__dut__DOT__intt_comp__DOT__Sub_Modular__DOT__reduce32_comp__DOT__A_o_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__MontModular__DOT__a_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__MontModular__DOT__t_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Red2u__DOT__a_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Red2u__DOT__t_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Red2t__DOT__a_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__ntt_comp__DOT__Red2t__DOT__t_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__MontModular__DOT__a_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__MontModular__DOT__t_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__Red2u__DOT__a_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__Red2u__DOT__t_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__Red2t__DOT__a_temp;
+    QData/*63:0*/ top__DOT__dut__DOT__intt_comp__DOT__Red2t__DOT__t_temp;
     
     // LOCAL VARIABLES
     // Internals; generally not touched by application code
-    CData/*0:0*/ __Vm_traceActivity[1];
+    CData/*0:0*/ __Vclklast__TOP__clk_i;
+    CData/*0:0*/ __Vm_traceActivity[2];
     
     // INTERNAL VARIABLES
     // Internals; generally not touched by application code
@@ -74,7 +133,7 @@ VL_MODULE(Vtop) {
     static QData _change_request(Vtop__Syms* __restrict vlSymsp);
     static QData _change_request_1(Vtop__Syms* __restrict vlSymsp);
   public:
-    static void _combo__TOP__1(Vtop__Syms* __restrict vlSymsp);
+    static void _combo__TOP__3(Vtop__Syms* __restrict vlSymsp);
   private:
     void _ctor_var_reset() VL_ATTR_COLD;
   public:
@@ -86,6 +145,8 @@ VL_MODULE(Vtop) {
   public:
     static void _eval_initial(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
     static void _eval_settle(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
+    static void _sequent__TOP__1(Vtop__Syms* __restrict vlSymsp);
+    static void _settle__TOP__2(Vtop__Syms* __restrict vlSymsp) VL_ATTR_COLD;
   private:
     static void traceChgSub0(void* userp, VerilatedFst* tracep);
     static void traceChgTop0(void* userp, VerilatedFst* tracep);
