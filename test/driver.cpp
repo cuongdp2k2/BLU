@@ -1,6 +1,42 @@
-#define MAX_SIM 20000
+#define MAX_SIM 200
 #define Q_def 8380417  
 void set_random(Vtop *dut, vluint64_t sim_unit) {
+
+	dut->rst_ni = (sim_unit > 5 ) ? 1 : 0 ;
+	dut->A_i = rand() % (1<<22) ;
+	dut->B_i = rand() % (1<<22) ;
+
+	// if(sim_unit == MAX_SIM -1) {
+	// 	for(int len=0 ; len < 256 ; len++ ) {
+	// 		if( len == 255 )
+	// 			printf("%8x \n",dut->top__DOT__dut__DOT__data[len]);
+	// 		else if(len % 8 == 7) 
+	// 			printf("%8x, \n",dut->top__DOT__dut__DOT__data[len]); 
+	// 		else
+	// 			printf("%8x, ",dut->top__DOT__dut__DOT__data[len]) ;
+	// 	}
+	// 	printf("\n\n");
+
+	// 	for(int len=0 ; len < 256 ; len++ ) {
+	// 		if( len == 255 )
+	// 			printf("%8x \n",dut->data_debug[len]);
+	// 		else if(len % 8 == 7) 
+	// 			printf("%8x, \n",dut->data_debug[len]); 
+	// 		else
+	// 			printf("%8x, ",dut->data_debug[len]) ;
+	// 	}
+	// 	printf("\n\n");
+
+	// 	for(int len=0 ; len < 256 ; len++ ) {
+	// 		if( len == 255 )
+	// 			printf("%8x \n",dut->data_out[len]);
+	// 		else if(len % 8 == 7) 
+	// 			printf("%8x, \n",dut->data_out[len]); 
+	// 		else
+	// 			printf("%8x, ",dut->data_out[len]) ;
+	// 	}
+	// 	printf("\n\n");
+	// }
 
 // -----------------Random for test ----------------------------------------
 	// --------------------- Random for Mont-Reduce ----------------------------------
@@ -64,10 +100,10 @@ void set_random(Vtop *dut, vluint64_t sim_unit) {
 	// b = dut->b_i ;
 
 	// ---------------- Random for NTT/INTT -------------------------------
-	dut->data1_i = -(1<<23 - 2<<13 + 1) + rand() % (1<<23 - 2<<13 + 1) ;
-	dut->data2_i = -(1<<23 - 2<<13 + 1) + rand() % (1<<23 - 2<<13 + 1) ;
-	dut->reset_ni = 1 ;
-	dut->zeta_i = 25847 ;
+	// dut->data1_i 	= -8380417 + rand() % 8380417 ;
+	// dut->data2_i 	= -8380417 + rand() % 8380417 ;
+	// dut->reset_ni 	= 1 ;
+	// dut->zeta_i 	= 25847 ;
 
 	// static long unsigned int  data1_temp = 0 ;
 	// static long unsigned int  data2_temp = 0 ;

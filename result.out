@@ -1,0 +1,118 @@
+make[1]: Entering directory '/home/dpcuong/FIPS204/workspace'
+-------------------> BUILD <----------------------
+make[2]: Entering directory '/home/dpcuong/FIPS204/workspace/obj_dir'
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -DCOVERAGE  -Os -c -o tb_top.o ../test/tb_top.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -DCOVERAGE  -Os -c -o Vtop.o Vtop.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -DCOVERAGE  -Os -c -o Vtop__Trace.o Vtop__Trace.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -DCOVERAGE   -c -o Vtop__Slow.o Vtop__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -DCOVERAGE   -c -o Vtop__1__Slow.o Vtop__1__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -DCOVERAGE   -c -o Vtop__Syms.o Vtop__Syms.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -DCOVERAGE   -c -o Vtop__Trace__Slow.o Vtop__Trace__Slow.cpp
+ar -cr Vtop__ALL.a Vtop.o Vtop__Trace.o Vtop__Slow.o Vtop__1__Slow.o Vtop__Syms.o Vtop__Trace__Slow.o
+ranlib Vtop__ALL.a
+g++    tb_top.o verilated.o verilated_fst_c.o Vtop__ALL.a   -lz    -o Vtop
+make[2]: Leaving directory '/home/dpcuong/FIPS204/workspace/obj_dir'
+-----------------> SIMULATING <-------------------
+    ffa6448f,     ff87e360,     ffd5b7a0,     ffcce7a6,     ffce1b67,     ffcfbccc,     fff353f4,     ffedf827, 
+    ff971ee1,     fffa3c3f,     ffaab83f,     ff931709,     ffbd0194,     ffc79e77,     ff8148ee,     ffe3405b, 
+    fff35fd9,     ffe7620a,     ffa4a82f,     ffc4a75c,     ff96c316,     ff9ec9a9,     ff954dc3,     ff8922be, 
+    ff932f4d,     ffdf04f3,     ffa1390c,     fff0f247,     fffcc133,     fff6d767,     ffb84445,     ff8306c2, 
+    fffe9ac9,     ffeddce6,     ffafcf69,     ffacb730,     ffbd99b2,     ffa3235e,     fffa9058,     ffd49894, 
+    fffd409e,     ffa54897,     ffc7909e,     ffba4232,     ffccc80f,     ffa8ba8e,     fffd638f,     ffc027e8, 
+    ffeffd99,     ffa20bbe,     ffe4b046,     ff86c0af,     ffa0b669,     fff9de0a,     ff8fc36f,     ffb3c5b7, 
+    ffb8e3fd,     ff90dd7c,     ffa4b7fe,     ff95a630,     ff87b4e3,     ffdcdc44,     ff988cf4,     ff864fac, 
+    ffaaba2b,     ffa83d5e,     ff92e7dd,     ffe833de,     ffab41bd,     ff8d7835,     ff9ccd73,     ff88835c, 
+    ff92a1cd,     ffe43e12,     ffc2a58f,     ffdf49de,     ffecd9a1,     ffa00a1e,     ffff52c7,     ffdcd73b, 
+    ffa1f6de,     ffc4040d,     ffe377eb,     ffc28d48,     ffbde217,     ffd31c5b,     ffd63400,     fff6a616, 
+    ffe3d9d8,     fffacbff,     ff8c4c46,     ffeb6ebd,     ffb7a943,     ff84ba3b,     ffd19f6a,     ffe2436f, 
+    ff8cd89b,     ffe46749,     ffaa784e,     ffb7fa59,     ffd1c07f,     ffa726c2,     ffc05db6,     ffe4424e, 
+    ffeb45d5,     ffe2e447,     ffa38d2c,     ffd81f77,     ffe2cf66,     ff82e0f3,     ffb4f6b2,     ffe4a745, 
+    ffc6c502,     fff84f9e,     ff87358d,     ffe4881a,     ffcb6bfa,     ffdd498e,     ffbb2f30,     ffaf45d2, 
+    ffb8168d,     ffa75c78,     fffa9590,     ffef9fd2,     ffabf6b4,     ffcc34fb,     ffb1e441,     ff98b050, 
+    ff909d44,     ffbc3d90,     ffb08bab,     ffc23ec4,     ffe34453,     ffd0ca62,     ff868212,     ffce8a29, 
+    ff93afa9,     ffa9ef3f,     ff86aaa0,     fff65f11,     ff8cb134,     ffbb8153,     ffbb0756,     ffd35637, 
+    ff93d1f1,     ffc21ce5,     ffb7de51,     ffdf1dec,     ff9f6673,     fff2ed83,     ffee44c0,     ffd75d02, 
+    fffa2afc,     ffc8db50,     ffa6fdd4,     ff8622b0,     fff4f14c,     ffb8c316,     ff9eb302,     ff858e90, 
+    fff4e0a8,     ffcf1eae,     ffa7ae56,     ffb825fb,     ff9fe910,     ffae1069,     ff86b024,     ff9379bb, 
+    ffd7dfaa,     ffed1bc6,     ff89d8cc,     ffc471df,     ff889e19,     ffc4c023,     ff97c816,     ff9c500c, 
+    ffe6be09,     ffaf8768,     fffb4df9,     ff86247d,     ff8275eb,     ffc993b9,     ffbd6280,     fffc80e8, 
+    ff926f0a,     ffc44155,     ff82a399,     ff876056,     fffce46c,     ffa1369c,     ffecafe9,     fff1c514, 
+    ffd0364b,     ff945e3f,     ff89ec10,     ffd0005c,     ffc24ea9,     ff907c35,     ffe35a18,     fffa0f54, 
+    fffd77fd,     ffcd13e5,     ffbe8133,     ff861616,     fff1b50a,     ffb62a4a,     ff824723,     ffd87313, 
+    ffe591b4,     ffdd761e,     ffbe7891,     ffc7e8a0,     ffa709d7,     ffdbbc12,     ffc46989,     ff9959e2, 
+    ff9ffd67,     ffa6ee23,     ff809b3a,     ff9ce1d4,     ffa805c0,     ffed2b24,     ffee87e9,     fff81c0c, 
+    ffe16a64,     fff853fa,     ffa81d68,     ff83ba0d,     ffe8b131,     ffeb5882,     fffda963,     ffc62a2e, 
+    ff986d67,     ff9c2b96,     ffac2145,     ffea0372,     ffb236e2,     ffae486a,     ffc27686,     fff7a997, 
+    ff8bbe88,     ffe0d018,     ffbf9237,     ff92a960,     ffbc8c2b,     ffe3dcc1,     ffabe344,     ffbc6a93, 
+    ff8acae4,     ffac5e7f,     ffd92c68,     ffb2b0a5,     fff96aa4,     ffa7b552,     ff8acdb1,     ffdad508 
+
+
+    b5f1ff0f,     1d821d60,     fd703680,     63079226,     426a6347,     da6bf20c,     ab819734,     88f24dc7, 
+    2a2ce481,     20c5279f,     1eeedc3f,     cd41dda9,     7c6b7214,     cfb60657,     b12c46ae,      ca5a6bb, 
+    226a7279,      27dfd2a,     780df6cf,     624f2adc,     3533def6,     fa0e0f89,     d22545c3,     42ba7bfe, 
+    d74b9ccd,     2e9cd6f3,     f8910d8c,     9b59e047,     f7d9e0b3,     5d602d27,     e5e75d85,     adabe0c2, 
+    b6b963c9,     cf9911a6,     2e072d29,     daa06810,     aa0503b2,     c56a60fe,     63f296d8,     f1a5a174, 
+    21e6a2de,     3c414c57,     bf47601e,     6bd05192,     edf3d3af,     5cb5246e,     78d5d94f,     4bb57f68, 
+    2d113f39,     be620cbe,     9a4627e6,     b1babacf,     9a6c9d49,     4e87edaa,     c273536f,     5e19b6b7, 
+    cc7a623d,     88e27e9c,     48e9339e,     c43443f0,     d2244863,     1b320dc4,     7b357a94,     88ddac2c, 
+    b8295d0b,     a99c88be,     94f031dd,     302c7d5e,     5b48675d,     e4c46555,      d93bc73,     4a8d47dc, 
+    5cbccbed,     9ad93932,     b6dd796f,     4b307f9e,     14e217e1,     fd11905e,     64c41ca7,     41f3571b, 
+    f72ab75e,     1bde1ecd,     c1ac2e8b,     5f957148,     6a660c77,     51fd9f9b,      d84a5a0,      4de8b56, 
+    db5ffe38,     246bf5df,     e606a886,     fd79c33d,      cfc4143,     4d7da0bb,     54358d0a,     b1871aef, 
+    c4f8471b,     d5873b89,     c330394e,      25d2e79,     d79f5b1f,     ee17b002,     88c18f96,     1678a70e, 
+    6aed6a35,     219b8a07,     2f07644c,     4d4dbeb7,     3c00d4a6,     cf02bb33,     deb6b272,      109a9a5, 
+    eb60ba02,     6e40fe9e,     607f1bed,     23a4e41a,      fb43ada,     3c01de2e,     63baa9b0,     b89275b2, 
+    604dd50d,     3602cfd8,     a24db690,     59ab92f2,     517e8d34,     2795803b,     ecaf4ee1,     16d6b550, 
+    495a8a0f,     e18da960,      23b38c0,     9c923d26,     bd31d387,     2533878c,     546510b4,     76e9a287, 
+    d5015941,     df2f50df,     e066943f,     31e45069,     830e9114,     2fd93697,     4dd64b2e,     f320d9fb, 
+    dd7c4d39,     fd50c6ea,     873b598f,     9d3a23dc,     c9f9a736,      52f83c9,     2d0555c3,     bc57c97e, 
+    27dac1cd,     d12132f3,      6b1648c,     64880447,      81fa1b3,     a28d81a7,     19892b05,     515a2cc2, 
+    4943d1c9,     3042a826,     d15871a9,     24b90650,     55762fb2,     39dbe5be,     9c0289d8,      e038fb4, 
+    de13de5e,     c30944d7,     4047c11e,     93a432d2,     11a5bc6f,     a29c50ae,     8724edcf,     b3cad068, 
+    d2cebbf9,     40e20abe,     658338a6,     4d52c68f,     64d4cf89,     b16bce6a,     3cac336f,     a14dd4b7, 
+    32f765bd,     763f3c5c,     b6603c5e,     3af70870,     2ceb2163,     e487aac4,     83fb9f54,     762ef32c, 
+    472c174b,     55b3f1fe,     6a359ddd,     cfa3ea5e,     a40e1c1d,     1a568b15,     f1a5de73,     b483bedc, 
+    a26877ad,     64ef42f2,     48a7d1af,     b48e141e,     eaf79b61,      22e83de,     9b3a88e7,     bdc6575b, 
+     819365e,     e3a9e94d,     3e1ac14b,     9fefa948,     9515b7b7,     ada8991b,     f227c260,     fb0ec0d6, 
+    2467b578,     db89a21f,     1911f006,      25d1a3d,     f2731143,     b18bd3bb,     ab6db1ca,     4e3d6bef, 
+    3a216a1b,     2a419309,     3c24b74e,     fd12c639,     280425df,     11369d82,     76bf2bd6,     e94fdd8e, 
+    94e92175,     de2a3e87,     d03fb60c,     b2628037,     c3c4ca26,     300306b3,     20b33af2,     febfa4e5, 
+    142cd002,     91afa09e,     9e8f4f2d,     dc242c1a,     efe29d1a,     c3b8b4ee,     9bbbb4b0,     46cc15f2, 
+    9f22580d,     c94be918,     5da77490,     a633acb2,     add96034,     d802e9bb,     12b479a1,     e85aab50 
+
+
+    ffa6448f,     ff87e360,     ffd5b7a0,     ffcce7a6,     ffce1b67,     ffcfbccc,     fff353f4,     ffedf827, 
+    ff971ee1,     fffa3c3f,     ffaab83f,     ff931709,     ffbd0194,     ffc79e77,     ff8148ee,     ffe3405b, 
+    fff35fd9,     ffe7620a,     ffa4a82f,     ffc4a75c,     ff96c316,     ff9ec9a9,     ff954dc3,     ff8922be, 
+    ff932f4d,     ffdf04f3,     ffa1390c,     fff0f247,     fffcc133,     fff6d767,     ffb84445,     ff8306c2, 
+    fffe9ac9,     ffeddce6,     ffafcf69,     ffacb730,     ffbd99b2,     ffa3235e,     fffa9058,     ffd49894, 
+    fffd409e,     ffa54897,     ffc7909e,     ffba4232,     ffccc80f,     ffa8ba8e,     fffd638f,     ffc027e8, 
+    ffeffd99,     ffa20bbe,     ffe4b046,     ff86c0af,     ffa0b669,     fff9de0a,     ff8fc36f,     ffb3c5b7, 
+    ffb8e3fd,     ff90dd7c,     ffa4b7fe,     ff95a630,     ff87b4e3,     ffdcdc44,     ff988cf4,     ff864fac, 
+    ffaaba2b,     ffa83d5e,     ff92e7dd,     ffe833de,     ffab41bd,     ff8d7835,     ff9ccd73,     ff88835c, 
+    ff92a1cd,     ffe43e12,     ffc2a58f,     ffdf49de,     ffecd9a1,     ffa00a1e,     ffff52c7,     ffdcd73b, 
+    ffa1f6de,     ffc4040d,     ffe377eb,     ffc28d48,     ffbde217,     ffd31c5b,     ffd63400,     fff6a616, 
+    ffe3d9d8,     fffacbff,     ff8c4c46,     ffeb6ebd,     ffb7a943,     ff84ba3b,     ffd19f6a,     ffe2436f, 
+    ff8cd89b,     ffe46749,     ffaa784e,     ffb7fa59,     ffd1c07f,     ffa726c2,     ffc05db6,     ffe4424e, 
+    ffeb45d5,     ffe2e447,     ffa38d2c,     ffd81f77,     ffe2cf66,     ff82e0f3,     ffb4f6b2,     ffe4a745, 
+    ffc6c502,     fff84f9e,     ff87358d,     ffe4881a,     ffcb6bfa,     ffdd498e,     ffbb2f30,     ffaf45d2, 
+    ffb8168d,     ffa75c78,     fffa9590,     ffef9fd2,     ffabf6b4,     ffcc34fb,     ffb1e441,     ff98b050, 
+    2e857000,     c643c000,     3dc03400,     ceef7000,     29269400,     17abb800,     19daf800,     36fcfc00, 
+    ebd6fc00,     26de6400,     fb798000,     ca9a5c00,     dbebb000,     2a529400,      9c06800,     263d8400, 
+     31adc00,     d5b78c00,     c3255c00,     e7cbd000,     e3721400,     1c7fd400,     d2e50000,     e4853800, 
+    3e819000,     2364c000,     261d3000,     27634000,     f11a5000,     fd296800,     24ed3800,     1f9fc000, 
+    1bc66000,      51a0800,     33846800,     3188f400,     1cc5c000,     efcbfc00,     e885f000,     cd91f400, 
+    ef039800,     1574a800,     182c5000,     d9f7e400,     2c633c00,     c4595400,       356800,      7d75000, 
+    29197c00,     d2636000,     120fbc00,     c2782c00,     db7f3400,     d190bc00,     36060000,     3c6d6000, 
+    2ae21800,     eb2bcc00,     19bd3c00,     1bfc6800,      ac1d000,     e1171000,     22fdfc00,     26883000, 
+    f539b400,     d6826400,     fa99c000,     21081000,     e8bafc00,      58c4c00,     1106a000,     e6c73000, 
+    f35a2c00,     383b8c00,     c0bf1400,     1fbd6800,     c18a1800,     cffd1800,     369d5400,     eaa39400, 
+    fab9b000,      da24800,     3c245c00,     e5418000,     df330400,      132f800,     d79b7c00,     191db800, 
+    ec5ec400,       615400,     fa0f5800,     2d0d3000,     f0810000,     3f79f000,     e29dfc00,      8275000, 
+    2504f000,     ffa45800,     15cb6000,     fa5bec00,     ca25dc00,     ebc73800,     397c5400,     2a1c0800, 
+    109ec400,     e6d76800,     d8e20c00,     e1317800,     fbc9b800,     e7d89800,      1c1a800,      58c0400, 
+    f57ae000,     cceea000,     eacd8400,     e3b68000,      40e3400,     d1719c00,     d52d7000,     ff759400, 
+    d1d2f000,     f1a96400,     ceef6000,     e4c08c00,     c02bf000,     d415f800,     d983dc00,     e530e000 
+
+
+make[1]: Leaving directory '/home/dpcuong/FIPS204/workspace'

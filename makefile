@@ -71,7 +71,8 @@ clean:
 .PHONY: run
 run:
 	@echo "-----------------> RUNNING       	 <--------------------"
-	@make sim > result
+	@make sim > ./src_v2/dili_result.log
+	make sim
 	@echo "-----------------> RUN COMPLETED 	 <--------------------" 
 	@echo "-----------------> Please open result <--------------------"	
 	@cat result | grep FAIL

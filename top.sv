@@ -1,21 +1,20 @@
 /* verilator lint_off WIDTH */
+/* verilator lint_off UNUSED */
 module top #(
     parameter DATA_WIDTH = 32 ,
     parameter QINV = 58728449 ,
     parameter Q    = 8380417  
 )(
-    input logic reset_ni , clk_i,
-    input logic [DATA_WIDTH-1:0] data1_i , data2_i , 
-    input logic [DATA_WIDTH-1:0] zeta_i ,
-
-    output logic [DATA_WIDTH-1:0] data2_o , data1_o 
+    input logic        rst_ni , clk_i ,
+    input logic  [22:0] A_i , B_i ,
+    output reg   [23:0] Res_o 
 );
-    DigitalTop_v3 dut (
+    dili_modMult dut (
         .*
     );
 
-    always @(posedge clk_i) begin
+    // always @(posedge clk_i) begin
         
-    end
+    // end
 endmodule : top 
 /* verilator lint_on WIDTH */

@@ -1,4 +1,6 @@
 /* verilator lint_off UNOPTFLAT */
+/* verilator lint_off WIDTH */
+/* verilator lint_off UNUSED */
 module BU_new (
     input logic clk_i, rst_ni,
     input logic CT_nGS_i ,
@@ -10,6 +12,7 @@ module BU_new (
     reg [31:0] u_o_temp,t_o_temp ;
     logic signed [31:0] u_reduce32 , t_reduce32 , w_reduce32 ;
     logic signed [31:0] u_temp1 , t_temp1, u_temp2, t_temp2  ;
+    logic signed [31:0] u_ct , t_ct ;
     logic signed [31:0] add_reduce , sub_reduce , mult_reduce ;
     logic signed [31:0] t_selected , mult_inp ;
     logic signed [31:0] add2modular , sub2modular ;
@@ -28,6 +31,8 @@ module BU_new (
         .A_o (u_reduce32)
     );    
 
+    assign u_ct = (CT_nGS_i) ? u_i_temp : u_reduce32;
+
     Modulus Red_t2Q(
         .A_i(t_i_temp) ,
         .A_o(t_reduce32)
@@ -38,11 +43,13 @@ module BU_new (
         .A_o(w_reduce32)
     );
 
-    assign t_selected = (CT_nGS_i) ? t_reduce32 : mult_reduce ;
-    assign mult_inp   = (CT_nGS_i) ? sub_reduce : t_reduce32  ;
+    assign t_ct = (CT_nGS_i) ? t_i_temp : t_reduce32 ;
+
+    assign t_selected = (CT_nGS_i) ? t_ct : mult_reduce ;
+    assign mult_inp   = (CT_nGS_i) ? sub_reduce : t_ct  ;
 
     // add_modular
-    assign add2modular = u_reduce32 + t_selected ;
+    assign add2modular = u_ct + t_selected ;
 
     Modulus Add_Modular (
         .A_i (add2modular) ,
@@ -50,7 +57,7 @@ module BU_new (
     );
     
     // sub_modular
-    assign sub2modular = u_reduce32 - t_selected ;
+    assign sub2modular = u_ct - t_selected ;
 
     Modulus Sub_Modular(
         .A_i (sub2modular) ,
@@ -66,16 +73,18 @@ module BU_new (
     );
 
     // Output
-    assign u_temp1 = (CT_nGS_i) ? add_reduce >> 1 : add_reduce ;
-    assign t_temp1 = (CT_nGS_i) ? sub_reduce >> 1 : sub_reduce ;
+    assign u_temp1 = (CT_nGS_i) ? add2modular >> 1 : add2modular ;
+    assign t_temp1 = (CT_nGS_i) ? sub2modular >> 1 : sub2modular ;
+    // assign u_temp1 = (CT_nGS_i) ? add_reduce >> 1 : add_reduce ;
+    // assign t_temp1 = (CT_nGS_i) ? sub_reduce >> 1 : sub_reduce ;
 
     MontRED Red2u (
-        .A_i(u_temp1 * 41978),
+        .A_i(u_temp1),
         .A_o(u_temp2)
     );
 
     MontRED Red2t (
-        .A_i(t_temp1 * 41978),
+        .A_i(t_temp1 ),
         .A_o(t_temp2)
     );
 

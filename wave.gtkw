@@ -1,28 +1,83 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Sat May  4 15:42:18 2024
+[*] Tue May 21 07:00:35 2024
 [*]
 [dumpfile] "/home/dpcuong/FIPS204/workspace/wave.fst"
-[dumpfile_mtime] "Sat May  4 15:41:40 2024"
-[dumpfile_size] 51252
+[dumpfile_mtime] "Tue May 21 06:46:23 2024"
+[dumpfile_size] 39080
 [savefile] "/home/dpcuong/FIPS204/workspace/wave.gtkw"
 [timestart] 0
 [size] 1908 999
-[pos] 274 548
-*-3.937356 45 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] 98328 98840
+*0.062644 3 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.top.
 [treeopen] TOP.top.dut.
-[sst_width] 214
+[treeopen] TOP.top.dut.INTT256.
+[treeopen] TOP.top.dut.INTT256.INTT_BU[0].
+[treeopen] TOP.top.dut.INTT256.INTT_BU[3].
+[treeopen] TOP.top.dut.NTT256.
+[treeopen] TOP.top.dut.NTT256.NTT_BU[0].
+[treeopen] TOP.top.dut.NTT256.NTT_BU[0].NTT_BU.
+[treeopen] TOP.top.dut.NTT256.NTT_BU[3].
+[treeopen] TOP.top.dut.NTT256.NTT_BU[3].NTT_BU.
+[sst_width] 275
 [signals_width] 254
 [sst_expanded] 1
 [sst_vpaned_height] 292
+@420
+TOP.top.dut.NTT256.NTT_BU[0].NTT_BU.Q
+TOP.top.dut.NTT256.NTT_BU[0].NTT_BU.QINV
+TOP.top.dut.NTT256.NTT_BU[0].NTT_BU.WIDTH
 @22
-TOP.top.dut.A_i[63:0]
-TOP.top.dut.a_temp[63:0]
-TOP.top.dut.t_temp1[63:0]
-TOP.top.dut.t_temp2[63:0]
+TOP.top.dut.NTT256.NTT_BU[0].NTT_BU.a_even_i[31:0]
+TOP.top.dut.NTT256.NTT_BU[0].NTT_BU.a_odd_i[31:0]
+TOP.top.dut.NTT256.NTT_BU[0].NTT_BU.zeta_i[31:0]
+TOP.top.dut.NTT256.NTT_BU[0].NTT_BU.t[31:0]
+TOP.top.dut.NTT256.NTT_BU[0].NTT_BU.zeta_mul_odd[63:0]
+TOP.top.dut.NTT256.NTT_BU[0].NTT_BU.a_even_o[31:0]
+TOP.top.dut.NTT256.NTT_BU[0].NTT_BU.a_odd_o[31:0]
+@420
+TOP.top.dut.INTT256.INTT_BU[0].INTT_BU.Q
+TOP.top.dut.INTT256.INTT_BU[0].INTT_BU.QINV
+TOP.top.dut.INTT256.INTT_BU[0].INTT_BU.WIDTH
+@22
+TOP.top.dut.INTT256.INTT_BU[0].INTT_BU.a_even_i[31:0]
+TOP.top.dut.INTT256.INTT_BU[0].INTT_BU.a_odd_i[31:0]
+TOP.top.dut.INTT256.INTT_BU[0].INTT_BU.zeta_i[31:0]
+TOP.top.dut.INTT256.INTT_BU[0].INTT_BU.t[31:0]
 @23
-TOP.top.dut.A_o[31:0]
+TOP.top.dut.INTT256.INTT_BU[0].INTT_BU.u[31:0]
+@22
+TOP.top.dut.INTT256.INTT_BU[0].INTT_BU.zeta_mul_odd[63:0]
+TOP.top.dut.INTT256.INTT_BU[0].INTT_BU.mul_reduce[31:0]
+TOP.top.dut.INTT256.INTT_BU[0].INTT_BU.a_even_o[31:0]
+TOP.top.dut.INTT256.INTT_BU[0].INTT_BU.a_odd_o[31:0]
+@420
+TOP.top.dut.NTT256.NTT_BU[3].NTT_BU.Q
+TOP.top.dut.NTT256.NTT_BU[3].NTT_BU.QINV
+TOP.top.dut.NTT256.NTT_BU[3].NTT_BU.WIDTH
+@22
+TOP.top.dut.NTT256.NTT_BU[3].NTT_BU.a_even_i[31:0]
+TOP.top.dut.NTT256.NTT_BU[3].NTT_BU.a_odd_i[31:0]
+TOP.top.dut.NTT256.NTT_BU[3].NTT_BU.zeta_i[31:0]
+TOP.top.dut.NTT256.NTT_BU[3].NTT_BU.zeta_mul_odd[63:0]
+TOP.top.dut.NTT256.NTT_BU[3].NTT_BU.t[31:0]
+TOP.top.dut.NTT256.NTT_BU[3].NTT_BU.a_even_o[31:0]
+TOP.top.dut.NTT256.NTT_BU[3].NTT_BU.a_odd_o[31:0]
+@420
+TOP.top.dut.INTT256.INTT_BU[3].INTT_BU.Q
+TOP.top.dut.INTT256.INTT_BU[3].INTT_BU.QINV
+TOP.top.dut.INTT256.INTT_BU[3].INTT_BU.WIDTH
+@22
+TOP.top.dut.INTT256.INTT_BU[3].INTT_BU.a_even_i[31:0]
+TOP.top.dut.INTT256.INTT_BU[3].INTT_BU.a_odd_i[31:0]
+TOP.top.dut.INTT256.INTT_BU[3].INTT_BU.zeta_i[31:0]
+TOP.top.dut.INTT256.INTT_BU[3].INTT_BU.t[31:0]
+TOP.top.dut.INTT256.INTT_BU[3].INTT_BU.u[31:0]
+TOP.top.dut.INTT256.INTT_BU[3].INTT_BU.zeta_mul_odd[63:0]
+TOP.top.dut.INTT256.INTT_BU[3].INTT_BU.mul_reduce[31:0]
+TOP.top.dut.INTT256.INTT_BU[3].INTT_BU.a_even_o[31:0]
+TOP.top.dut.INTT256.INTT_BU[3].INTT_BU.a_odd_o[31:0]
 [pattern_trace] 1
 [pattern_trace] 0
