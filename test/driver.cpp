@@ -2,9 +2,9 @@
 #define Q_def 8380417  
 void set_random(Vtop *dut, vluint64_t sim_unit) {
 
-	dut->rst_ni = (sim_unit > 5 ) ? 1 : 0 ;
-	dut->A_i = rand() % (1<<22) ;
-	dut->B_i = rand() % (1<<22) ;
+	// dut->rst_ni = (sim_unit > 5 ) ? 1 : 0 ;
+	// dut->A_i = rand() % (1<<22) ;
+	// dut->B_i = rand() % (1<<22) ;
 
 	// if(sim_unit == MAX_SIM -1) {
 	// 	for(int len=0 ; len < 256 ; len++ ) {
@@ -69,35 +69,36 @@ void set_random(Vtop *dut, vluint64_t sim_unit) {
 
 
 	// --------------------- Random for Brent-Kung adder -----------------------------
-	// dut->a_i = rand()%(1<<15) ;
-	// dut->b_i = rand()%(1<<15) ;
-	// dut->carry_i = 0 ;
+	dut->a_i = rand()%(1<<15) ;
+	dut->b_i = rand()%(1<<15) ;
+	dut->rstn = 1 ;
+	dut->carry_i = 0 ;
 
-	// static int a = 0 , b = 0 ;
-	// static int testPassed = 0 , testFailed = 0 ;
+	static int a = 0 , b = 0 ;
+	static int testPassed = 0 , testFailed = 0 ;
 	
-	// if((dut->sum_o + dut->carry_o * 256) == a+b) {
-	// 	testPassed ++ ;
-	// 	printf("[%ld] a_i=%8x , b_i=%8x , sum_o = %8x , carry_o =%8x -> PASS\n",sim_unit*10+10,a,b,dut->sum_o,dut->carry_o) ;
-	// }
-	// else{
-	// 	testFailed ++ ;
-	// 	printf("[%ld] a_i=%8x , b_i=%8x , sum_o = %8x , carry_o =%8x -> FAIL\n",sim_unit*10+10,a,b,dut->sum_o,dut->carry_o) ;
-	// }
+	if((dut->sum_o + dut->carry_o * 256) == a+b) {
+		testPassed ++ ;
+		printf("[%ld] a_i=%8x , b_i=%8x , sum_o = %8x , carry_o =%8x -> PASS\n",sim_unit*10+10,a,b,dut->sum_o,dut->carry_o) ;
+	}
+	else{
+		testFailed ++ ;
+		printf("[%ld] a_i=%8x , b_i=%8x , sum_o = %8x , carry_o =%8x -> FAIL\n",sim_unit*10+10,a,b,dut->sum_o,dut->carry_o) ;
+	}
 
-	// if(sim_unit == MAX_SIM-1) {
-	// 	double passPercent = (double)(testPassed / (testPassed + testFailed))  ;
-	// 	double failPercent = testFailed / (testPassed + testFailed)  ;
+	if(sim_unit == MAX_SIM-1) {
+		double passPercent = (double)(testPassed / (testPassed + testFailed))  ;
+		double failPercent = testFailed / (testPassed + testFailed)  ;
 
-	// 	printf("-------------------------------------------------------------\n");
-	// 	printf("--------             TEST RESULT                   ----------\n");
-	// 	printf("-------------------------------------------------------------\n");
-	// 	printf("%d passed test , %d failed test \n",testPassed,testFailed) ;
-	// 	printf("-------------------------------------------------------------\n");
-	// }
+		printf("-------------------------------------------------------------\n");
+		printf("--------             TEST RESULT                   ----------\n");
+		printf("-------------------------------------------------------------\n");
+		printf("%d passed test , %d failed test \n",testPassed,testFailed) ;
+		printf("-------------------------------------------------------------\n");
+	}
 
-	// a = dut->a_i ;
-	// b = dut->b_i ;
+	a = dut->a_i ;
+	b = dut->b_i ;
 
 	// ---------------- Random for NTT/INTT -------------------------------
 	// dut->data1_i 	= -8380417 + rand() % 8380417 ;

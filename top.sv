@@ -5,12 +5,20 @@ module top #(
     parameter QINV = 58728449 ,
     parameter Q    = 8380417  
 )(
-    input logic        rst_ni , clk_i ,
-    input logic  [22:0] A_i , B_i ,
-    output reg   [23:0] Res_o 
+    input signed [31:0] a_i, b_i,
+    input clk_i, rstn,
+    input carry_i,
+    output signed [31:0] sum_o,
+    output carry_o
 );
-    dili_modMult dut (
-        .*
+    dili_adder dut (
+        .A(a_i) ,
+        .B(b_i) ,
+        .clk(clk_i) ,
+        .rstn(rstn) ,
+        .Ci(carry_i) ,
+        .S(sum_o) ,
+        .Co(carry_o)
     );
 
     // always @(posedge clk_i) begin
