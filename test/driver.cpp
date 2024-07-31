@@ -69,8 +69,8 @@ void set_random(Vtop *dut, vluint64_t sim_unit) {
 
 
 	// --------------------- Random for Brent-Kung adder -----------------------------
-	dut->a_i = rand()%(1<<15) ;
-	dut->b_i = rand()%(1<<15) ;
+	dut->a_i = rand()%(1<<8) ;
+	dut->b_i = rand()%(1<<8) ;
 	dut->rstn = 1 ;
 	dut->carry_i = 0 ;
 

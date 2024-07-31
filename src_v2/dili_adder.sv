@@ -5,11 +5,15 @@ module dili_adder(
     output signed [31:0] S,
     output Co
 );
-    reg [31:0] G_reg [6:1] ;
-    reg [31:0] P_reg [6:1] ;
-    reg        C_reg [6:1] ;
-    reg [31:0] P1_reg[6:2] ;
-    reg [32:1] C;
+    reg [31:0] G_reg  [6:1] ;
+    reg [31:0] P_reg  [6:1] ;
+    reg        C_reg  [11:1] ;
+    reg [31:0] P1_reg [11:2] ;
+    reg [31:0] P6_reg [11:7] ;
+    reg [31:0] G6_reg [11:7] ;
+    reg [32:1] C      [11:7];
+    reg [31:0] S_temp ;
+    reg        Co_temp ;
     // logic [31:0] P1, G1;
 	// logic [15:0] G2,P2;
 	// logic [7:0] G3, P3;
@@ -34,8 +38,8 @@ module dili_adder(
     //////// Generating 2nd order P's and G's signals ///////
     genvar i,j;
     generate
-        for(i=0; i<=30; i=i+2) begin: second_stage  //32
-            always @(posedge clk or negedge rstn) begin
+        for(i=0; i<=30; i=i+2) begin: second_stage_0  //32
+            always @(posedge clk or negedge rstn) begin 
                 if(!rstn) begin
                     P_reg[2][i+1] <= 0 ;
                     G_reg[2][i+1] <= 0 ;
@@ -47,7 +51,7 @@ module dili_adder(
         end
             // assign G2[i/2] = G1[i+1] | (P1[i+1] & G1[i]);
             // assign P2[i/2] = P1[i+1] & P1[i];
-        for(i=0; i<=30 ; i=i+2) begin
+        for(i=0; i<=30 ; i=i+2) begin : second_stage_1
             always @(posedge clk or negedge rstn) begin
                 if(!rstn) begin
                     P_reg[2][i] <= 0 ;
@@ -70,7 +74,7 @@ module dili_adder(
     end
     /////// Generating 3rd order P's and G's signals //////
     generate
-        for(i=1; i<=31; i=i+4) begin: third_stage   //16
+        for(i=1; i<=31; i=i+4) begin: third_stage_0   //16
             always @(posedge clk or negedge rstn) begin
                 if(!rstn) begin
                     P_reg[3][i+2] <= 0 ;
@@ -84,9 +88,9 @@ module dili_adder(
             // assign P3[i/2] = P2[i+1] & P2[i];
         end
 
-        for(i=0; i<=7 ; i=i+1) 
-            for(j=0; j<=2 ; j=j+1) begin
-                always @(posedge clk or negedge rstn) begin
+        for(i=0; i<=7 ; i=i+1) begin : third_stage_group
+            for(j=0; j<=2 ; j=j+1) begin : third_stage_1
+                always @(posedge clk or negedge rstn) begin : third_stage_bit_process
                     if(!rstn) begin
                         P_reg[3][4*i+j] <= 0 ;
                         G_reg[3][4*i+j] <= 0 ;
@@ -96,6 +100,7 @@ module dili_adder(
                     end
                 end
             end
+        end
     endgenerate
     always @(posedge clk or negedge rstn) begin
         if(!rstn) begin
@@ -109,7 +114,7 @@ module dili_adder(
     
     ///////  Generating 4th order P's and G's signals /////
     generate
-        for(i=3; i<=31; i=i+8) begin: fourth_stage  //8
+        for(i=3; i<=31; i=i+8) begin: fourth_stage_0  //8
             always @(posedge clk or negedge rstn) begin
                 if(!rstn) begin
                     P_reg[4][i+4] <= 0 ;
@@ -123,9 +128,9 @@ module dili_adder(
             // assign P4[i/2] = P3[i+1] & P3[i];
         end
 
-        for(i=0 ; i<=3; i=i+1) 
-            for(j=0; j<=6; j=j+1) begin
-                always @(posedge clk or negedge rstn) begin
+        for(i=0 ; i<=3; i=i+1) begin : fourth_stage_group
+            for(j=0; j<=6; j=j+1) begin : fourth_stage_1
+                always @(posedge clk or negedge rstn) begin : fourth_stage_bit_process
                     if(!rstn) begin
                         P_reg[4][8*i+j] <= 0;
                         G_reg[4][8*i+j] <= 0;
@@ -135,6 +140,7 @@ module dili_adder(
                     end
                 end
             end
+        end
     endgenerate
     always @(posedge clk or negedge rstn) begin
         if(!rstn) begin
@@ -148,22 +154,22 @@ module dili_adder(
     
     ///////  Generating 5th order P's and G's signals
     generate
-        for(i=7; i<=2; i=i+16) begin: fifth_stage  //4
+        for(i=7; i<=31; i=i+16) begin: fifth_stage_0  //4
             always @(posedge clk or negedge rstn) begin
                 if(!rstn) begin
                     P_reg[5][i+8] <= 0 ;
                     G_reg[5][i+8] <= 0 ;
                 end else begin
-                    G_reg[5][i+8] <= G_reg[4][i+8] | (P_reg[4][i+8] & G_reg[4][i+8]) ;
-                    P_reg[5][i+8] <= P_reg[4][i+8] & P_reg[4][i+8] ;
+                    G_reg[5][i+8] <= G_reg[4][i+8] | (P_reg[4][i+8] & G_reg[4][i]) ;
+                    P_reg[5][i+8] <= P_reg[4][i+8] & P_reg[4][i] ;
                 end
             end
             // assign G5[i/2] = G4[i+1] | (P4[i+1] & G4[i]);
             // assign P5[i/2] = P4[i+1] & P4[i];
         end
-        for(i=0 ; i<=1 ; i=i+1)
-            for(j=0; j<=14 ; j=j+1) begin
-                always @(posedge clk or negedge rstn) begin
+        for(i=0 ; i<=1 ; i=i+1) begin : fifth_stage_group
+            for(j=0; j<=14 ; j=j+1) begin : fifth_stage_1
+                always @(posedge clk or negedge rstn) begin : fifth_stage_bit_process
                     if(!rstn) begin
                         P_reg[5][16*i+j] <= 0;
                         G_reg[5][16*i+j] <= 0;
@@ -173,6 +179,7 @@ module dili_adder(
                     end
                 end
             end
+        end
     endgenerate
     always @(posedge clk or negedge rstn) begin
         if(!rstn) begin
@@ -192,14 +199,14 @@ module dili_adder(
     // assign G6 = G5[1] | (P5[1] & G5[0]);
     // assign P6 = P5[1] & P5[0];
     generate
-        for(i=0 ; i<=30 ; i=i+1) begin
+        for(i=0 ; i<=30 ; i=i+1) begin : sixth_stage
             always @(posedge clk or negedge rstn) begin
                 if(!rstn) begin
                     G_reg[6][i] <= 0 ;
                     P_reg[6][i] <= 0 ;
                 end else begin
                     G_reg[6][i] <= G_reg[5][i] ;
-                    P_reg[6][i] <= G_reg[5][i] ;
+                    P_reg[6][i] <= P_reg[5][i] ;
                 end
             end
         end
@@ -213,86 +220,258 @@ module dili_adder(
             P1_reg[6] <= P1_reg[5] ;
         end
     end
-    //////// Generating carry which can be calculated directly from input carry /////
+    //////// Generating 7th /////
     always @(posedge clk or negedge rstn) begin
-        if(!rstn)
-            C <= 0 ;
-        else begin
-            C[1]  <= G_reg[6][0]  | (P_reg[6][0]  & C_reg[6]);
-            C[2]  <= G_reg[6][1]  | (P_reg[6][1]  & C_reg[6]);
-            C[4]  <= G_reg[6][3]  | (P_reg[6][3]  & C_reg[6]);
-            C[8]  <= G_reg[6][7]  | (P_reg[6][7]  & C_reg[6]);
-            C[16] <= G_reg[6][15] | (P_reg[6][15] & C_reg[6]);
-            C[32] <= G_reg[6][31] | (P_reg[6][31] & C_reg[6]);
+        if(!rstn) begin
+            C[7] <= 0 ;
+            P1_reg[7] <=0 ;
+            C_reg[7] <=0 ;
+            P6_reg[7] <= 0 ;
+            G6_reg[7] <= 0 ;
+        end else begin 
+            C[7][1]  <= G_reg[6][0]  | (P_reg[6][0]  & C_reg[6]);
+            C[7][2]  <= G_reg[6][1]  | (P_reg[6][1]  & C_reg[6]);
+            C[7][3]  <= 0 ;
+            C[7][4]  <= G_reg[6][3]  | (P_reg[6][3]  & C_reg[6]);
+            C[7][5]  <= 0 ;
+            C[7][6]  <= 0 ;
+            C[7][7]  <= 0 ;
+            C[7][8]  <= G_reg[6][7]  | (P_reg[6][7]  & C_reg[6]);
+            C[7][9]  <= 0 ;
+            C[7][10] <= 0 ;
+            C[7][11] <= 0 ;
+            C[7][12] <= 0 ;
+            C[7][13] <= 0 ;
+            C[7][14] <= 0 ;
+            C[7][15] <= 0 ;
+            C[7][16] <= G_reg[6][15] | (P_reg[6][15] & C_reg[6]);
+            C[7][17] <= 0 ;
+            C[7][18] <= 0 ;
+            C[7][19] <= 0 ;
+            C[7][20] <= 0 ;
+            C[7][21] <= 0 ;
+            C[7][22] <= 0 ;
+            C[7][23] <= 0 ;
+            C[7][24] <= 0 ;
+            C[7][25] <= 0 ;
+            C[7][26] <= 0 ;
+            C[7][27] <= 0 ;
+            C[7][28] <= 0 ;
+            C[7][29] <= 0 ;
+            C[7][30] <= 0 ;
+            C[7][31] <= 0 ;
+            C[7][32] <= G_reg[6][31] | (P_reg[6][31] & C_reg[6]);
 
-            // assign C[1] = G1[0] | (P1[0] & Ci);
-            // assign C[2] = G2[0] | (P2[0] & Ci);
-            // assign C[4] = G3[0] | (P3[0] & Ci);
-            // assign C[8] = G4[0] | (P4[0] & Ci);
-            // assign C[16] = G5[0] | (P5[0] & Ci);
-            // assign C[32] = G6 | (P6 & Ci);
-            
-            /////// Now generating all carry signals at remaining stages ////////////
-            
-            C[3] <= G_reg[6][2] | (P_reg[6][2] & C[2]);
-            //assign C[3] = G1[2] | (P1[2] & C[2]);
-            
-            C[5] <= G_reg[6][4] | (P_reg[6][4] & C[4]);
-            C[6] <= G_reg[6][3] | (P_reg[6][3] & C[4]);
-            C[7] <= G_reg[6][6] | (P_reg[6][6] & C[6]);
-            // assign C[5] = G1[4] | (P1[4] & C[4]);
-            // assign C[6] = G2[2] | (P2[2] & C[4]);
-            // assign C[7] = G1[6] | (P1[6] & C[6]);
-            
-            C[9]  <= G_reg[6][8]  | (P_reg[6][8]  & C[8]);
-            C[10] <= G_reg[6][7]  | (P_reg[6][7]  & C[8]);
-            C[11] <= G_reg[6][10] | (P_reg[6][10] & C[10]);
-            C[12] <= G_reg[6][11] | (P_reg[6][11] & C[8]);
-            C[13] <= G_reg[6][12] | (P_reg[6][12] & C[12]);
-            C[14] <= G_reg[6][13] | (P_reg[6][13] & C[12]);
-            C[15] <= G_reg[6][14] | (P_reg[6][14] & C[14]);
-            // assign C[9] = G1[8] | (P1[8] & C[8]);
-            // assign C[10] = G2[4] | (P2[4] & C[8]);
-            // assign C[11] = G1[10] | (P1[10] & C[10]);
-            // assign C[12] = G3[2] | (P3[2] & C[8]);
-            // assign C[13] = G1[12] | (P1[12] & C[12]);
-            // assign C[14] = G2[6] | (P2[6] & C[12]);
-            // assign C[15] = G1[14] | (P1[14] & C[14]);
-            
-            C[17] <= G_reg[6][16] | (P_reg[6][16] & C[16]);
-            C[18] <= G_reg[6][17] | (P_reg[6][17] & C[16]);     //2nd order => /2
-            C[19] <= G_reg[6][18] | (P_reg[6][18] & C[18]);
-            C[20] <= G_reg[6][19] | (P_reg[6][19] & C[16]); //3rd order = /4
-            C[21] <= G_reg[6][20] | (P_reg[6][20] & C[20]);
-            C[22] <= G_reg[6][21] | (P_reg[6][21] & C[20]);
-            C[23] <= G_reg[6][22] | (P_reg[6][22] & C[22]);
-            C[24] <= G_reg[6][23] | (P_reg[6][23] & C[16]); //4th order => /8
-            C[25] <= G_reg[6][24] | (P_reg[6][24] & C[24]);
-            C[26] <= G_reg[6][25] | (P_reg[6][25] & C[24]);
-            C[27] <= G_reg[6][26] | (P_reg[6][26] & C[26]);
-            C[28] <= G_reg[6][27] | (P_reg[6][27] & C[24]);
-            C[29] <= G_reg[6][28] | (P_reg[6][28] & C[28]);
-            C[30] <= G_reg[6][29] | (P_reg[6][29] & C[28]);
-            C[31] <= G_reg[6][30] | (P_reg[6][30] & C[30]);
-            // assign C[17] = G1[16] | (P1[16] & C[16]);
-            // assign C[18] = G2[8] | (P2[8] & C[16]);     //2nd order => /2
-            // assign C[19] = G1[18] | (P1[18] & C[18]);
-            // assign C[20] = G3[4] | (P3[4] & C[16]); //3rd order = /4
-            // assign C[21] = G1[20] | (P1[20] & C[20]);
-            // assign C[22] = G2[10] | (P2[10] & C[20]);
-            // assign C[23] = G1[22] | (P1[22] & C[22]);
-            // assign C[24] = G4[2] | (P4[2] & C[16]); //4th order => /8
-            // assign C[25] = G1[24] | (P1[24] & C[24]);
-            // assign C[26] = G2[12] | (P2[12] & C[24]);
-            // assign C[27] = G1[26] | (P1[26] & C[26]);
-            // assign C[28] = G3[6] | (P3[6] & C[24]);
-            // assign C[29] = G1[28] | (P1[28] & C[28]);
-            // assign C[30] = G2[14] | (P2[14] & C[28]);
-            // assign C[31] = G1[30] | (P1[30] & C[30]);
+            P1_reg[7] <= P1_reg[6] ;
+            P6_reg[7] <= P_reg[6] ;
+            G6_reg[7] <= G_reg[6] ;
+            C_reg[7] <= C_reg[6] ;
         end
     end
-    ///////////////////////
-    assign S = P1_reg[6] ^ {C[31:1],Ci};
-    assign Co = C[32];
+    //////// Generating 8th /////
+    always @(posedge clk or negedge rstn) begin
+        if(!rstn) begin
+            C[8] <= 0 ;
+            P1_reg[8] <=0 ;
+            C_reg[8] <=0 ;
+            P6_reg[8] <= 0 ;
+            G6_reg[8] <= 0 ;
+        end else begin 
+            C[8][1]  <= C[7][1];
+            C[8][2]  <= C[7][2];
+            C[8][3]  <= G6_reg[7][2] | (P6_reg[7][2] & C[7][2]) ;
+            C[8][4]  <= C[7][4];
+            C[8][5]  <= G6_reg[7][4] | (P6_reg[7][4] & C[7][4]);
+            C[8][6]  <= G6_reg[7][5] | (P6_reg[7][5] & C[7][4]);
+            C[8][7]  <= 0 ;
+            C[8][8]  <= C[7][8];
+            C[8][9]  <= G6_reg[7][8]  | (P6_reg[7][8]  & C[7][8]);
+            C[8][10] <= G6_reg[7][9]  | (P6_reg[7][9]  & C[7][8]);
+            C[8][11] <= 0 ;
+            C[8][12] <= G6_reg[7][11] | (P6_reg[7][11] & C[7][8]);
+            C[8][13] <= 0 ;
+            C[8][14] <= 0 ;
+            C[8][15] <= 0 ;
+            C[8][16] <= C[7][16];
+            C[8][17] <= G6_reg[7][16] | (P6_reg[7][16] & C[7][16]);
+            C[8][18] <= G6_reg[7][17] | (P6_reg[7][17] & C[7][16]);
+            C[8][19] <= 0 ;
+            C[8][20] <= G6_reg[7][19] | (P6_reg[7][19] & C[7][16]);
+            C[8][21] <= 0 ;
+            C[8][22] <= 0 ;
+            C[8][23] <= 0 ;
+            C[8][24] <= G6_reg[7][23] | (P6_reg[7][23] & C[7][16]);
+            C[8][25] <= 0 ;
+            C[8][26] <= 0 ;
+            C[8][27] <= 0 ;
+            C[8][28] <= 0 ;
+            C[8][29] <= 0 ;
+            C[8][30] <= 0 ;
+            C[8][31] <= 0 ;
+            C[8][32] <= C[7][32];
+
+            P1_reg[8] <= P1_reg[7] ;
+            P6_reg[8] <= P6_reg[7] ;
+            G6_reg[8] <= G6_reg[7] ;
+            C_reg[8] <= C_reg[7] ;
+        end
+    end
+    //////// Generating 9th /////
+    always @(posedge clk or negedge rstn) begin
+        if(!rstn) begin
+            C[9] <= 0 ;
+            P1_reg[9] <=0 ;
+            C_reg[9] <=0 ;
+            P6_reg[9] <= 0 ;
+            G6_reg[9] <= 0 ;
+        end else begin 
+            C[9][1]  <= C[8][1];
+            C[9][2]  <= C[8][2];
+            C[9][3]  <= C[8][3];
+            C[9][4]  <= C[8][4];
+            C[9][5]  <= C[8][5];
+            C[9][6]  <= C[8][6];
+            C[9][7]  <= G6_reg[8][6] | (P6_reg[8][6] & C[8][6]);
+            C[9][8]  <= C[8][8];
+            C[9][9]  <= C[8][9];
+            C[9][10] <= C[8][10];
+            C[9][11] <= G6_reg[8][10] | (P6_reg[8][10] & C[8][10]);
+            C[9][12] <= C[8][12];
+            C[9][13] <= G6_reg[8][12] | (P6_reg[8][12] & C[8][12]);
+            C[9][14] <= G6_reg[8][13] | (P6_reg[8][13] & C[8][12]);
+            C[9][15] <= 0 ;
+            C[9][16] <= C[8][16];
+            C[9][17] <= C[8][17];
+            C[9][18] <= C[8][18];
+            C[9][19] <= G6_reg[8][18] | (P6_reg[8][18] & C[8][18]);
+            C[9][20] <= C[8][20];
+            C[9][21] <= G6_reg[8][20] | (P6_reg[8][20] & C[8][20]);
+            C[9][22] <= G6_reg[8][21] | (P6_reg[8][21] & C[8][20]);
+            C[9][23] <= 0 ;
+            C[9][24] <= C[8][24];
+            C[9][25] <= G6_reg[8][24] | (P6_reg[8][24] & C[8][24]);
+            C[9][26] <= G6_reg[8][25] | (P6_reg[8][25] & C[8][24]);
+            C[9][27] <= 0 ;
+            C[9][28] <= G6_reg[8][27] | (P6_reg[8][27] & C[8][24]);
+            C[9][29] <= 0 ;
+            C[9][30] <= 0 ;
+            C[9][31] <= 0 ;
+            C[9][32] <= C[8][32];
+
+            P1_reg[9] <= P1_reg[8] ;
+            P6_reg[9] <= P6_reg[8] ;
+            G6_reg[9] <= G6_reg[8] ;
+            C_reg[9]  <= C_reg[8] ;
+        end
+    end
+    //////// Generating 10th /////
+    always @(posedge clk or negedge rstn) begin
+        if(!rstn) begin
+            C[10] <= 0 ;
+            P1_reg[10] <=0 ;
+            C_reg[10] <=0 ;
+            P6_reg[10] <= 0 ;
+            G6_reg[10] <= 0 ;
+        end else begin 
+            C[10][1]  <= C[9][1];
+            C[10][2]  <= C[9][2];
+            C[10][3]  <= C[9][3];
+            C[10][4]  <= C[9][4] ;
+            C[10][5]  <= C[9][5];
+            C[10][6]  <= C[9][6];
+            C[10][7]  <= C[9][7];
+            C[10][8]  <= C[9][8];
+            C[10][9]  <= C[9][9];
+            C[10][10] <= C[9][10];
+            C[10][11] <= C[9][11];
+            C[10][12] <= C[8][12];
+            C[10][13] <= C[9][13];
+            C[10][14] <= C[9][14];
+            C[10][15] <= G6_reg[9][14] | (P6_reg[9][14] & C[9][14]);
+            C[10][16] <= C[9][16];
+            C[10][17] <= C[9][17];
+            C[10][18] <= C[9][18];
+            C[10][19] <= C[9][19];
+            C[10][20] <= C[8][20];
+            C[10][21] <= C[9][21];
+            C[10][22] <= C[9][22];
+            C[10][23] <= G6_reg[9][22] | (P6_reg[9][22] & C[9][22]);
+            C[10][24] <= C[9][24];
+            C[10][25] <= C[9][25];
+            C[10][26] <= C[9][26];
+            C[10][27] <= G6_reg[9][26] | (P6_reg[9][26] & C[9][26]);
+            C[10][28] <= C[9][28];
+            C[10][29] <= G6_reg[9][28] | (P6_reg[9][28] & C[9][28]);
+            C[10][30] <= G6_reg[9][29] | (P6_reg[9][29] & C[9][28]);
+            C[10][31] <= 0 ;
+            C[10][32] <= C[9][32];
+
+            P1_reg[10] <= P1_reg[9] ;
+            P6_reg[10] <= P6_reg[9] ;
+            G6_reg[10] <= G6_reg[9] ;
+            C_reg[10] <= C_reg[9] ;
+        end
+    end
+    //////// Generating 11th /////
+    always @(posedge clk or negedge rstn) begin
+        if(!rstn) begin
+            C[11] <= 0 ;
+            P1_reg[11] <=0 ;
+            C_reg[11] <=0 ;
+            P6_reg[11] <= 0 ;
+            G6_reg[11] <= 0 ;
+        end else begin 
+            C[11][1]  <= C[10][1];
+            C[11][2]  <= C[10][2];
+            C[11][3]  <= C[10][3];
+            C[11][4]  <= C[10][4] ;
+            C[11][5]  <= C[10][5];
+            C[11][6]  <= C[10][6];
+            C[11][7]  <= C[10][7];
+            C[11][8]  <= C[10][8];
+            C[11][9]  <= C[10][9];
+            C[11][10] <= C[10][10];
+            C[11][11] <= C[10][11];
+            C[11][12] <= C[10][12];
+            C[11][13] <= C[10][13];
+            C[11][14] <= C[10][14];
+            C[11][15] <= C[10][15];
+            C[11][16] <= C[10][16];
+            C[11][17] <= C[10][17];
+            C[11][18] <= C[10][18];
+            C[11][19] <= C[10][19];
+            C[11][20] <= C[10][20];
+            C[11][21] <= C[10][21];
+            C[11][22] <= C[10][22];
+            C[11][23] <= C[10][23];
+            C[11][24] <= C[10][24];
+            C[11][25] <= C[10][25];
+            C[11][26] <= C[10][26];
+            C[11][27] <= C[10][27];
+            C[11][28] <= C[10][28];
+            C[11][29] <= C[10][29];
+            C[11][30] <= C[10][30];
+            C[11][31] <= G6_reg[10][30] | (P6_reg[10][30] & C[10][30]);
+            C[11][32] <= C[10][32];
+
+            P1_reg[11] <= P1_reg[10] ;
+            P6_reg[11] <= P6_reg[10] ;
+            G6_reg[11] <= G6_reg[10] ;
+            C_reg[11] <= C_reg[10] ;
+        end
+    end
+    ////
+    always @(posedge clk or negedge rstn) begin
+        if(!rstn) begin
+            S_temp <= 0;
+            Co_temp <= 0;
+        end else begin
+            S_temp <= P1_reg[11] ^ {C[11][31:1],C_reg[11]};
+            Co_temp <= C[11][32];
+        end
+    end
+    
+    assign S = S_temp ;
+    assign Co = Co_temp ;
     
 endmodule : dili_adder
